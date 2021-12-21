@@ -6,7 +6,5 @@ import lombok.Getter;
 @Getter
 @Builder
 public class OrderItemDTO {
-
   private String name;
-
 }

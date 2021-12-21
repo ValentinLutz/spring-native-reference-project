@@ -1,1 +1,8 @@
+spring:
+  data:
+    rest:
+      base-path: /api
 
+springdoc:
+  swagger-ui:
+    path: /api

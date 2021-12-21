@@ -14,7 +14,13 @@
     <packaging>jar</packaging>
 
     <properties>
-        <repackage.classifier/>
+        <!-- OPENAPI -->
+        <swagger-maven-plugin.output-path>
+            ${project.basedir}/src/main/resources/META-INF/resources/swagger-ui
+        </swagger-maven-plugin.output-path>
+        <swagger-maven-plugin.config-base-path>
+            ${project.basedir}/src/main/openapi
+        </swagger-maven-plugin.config-base-path>
     </properties>
 
     <dependencies>
@@ -37,6 +43,13 @@
             <artifactId>swagger-annotations</artifactId>
             <version>${swagger-maven-plugin.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- OPEN API UI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webflux-ui</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
         </dependency>
 
         <!-- LOMBOK -->
@@ -63,11 +76,15 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <profiles>
+                        <profile>${profile}</profile>
+                    </profiles>
                     <image>
                         <builder>paketobuildpacks/builder:tiny</builder>
                         <env>
