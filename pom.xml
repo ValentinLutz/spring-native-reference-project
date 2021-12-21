@@ -25,12 +25,13 @@
         <!-- SPRING BOOT -->
         <java.version>17</java.version>
         <spring-boot.version>2.6.1</spring-boot.version>
+        <spring.version>5.3.14</spring.version>
         <!-- SPRING NATIVE -->
         <spring-native.version>0.11.0</spring-native.version>
         <!-- SUREFIRE -->
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <!-- OPENAPI -->
-        <springdoc-openapi-ui.version>1.6.0</springdoc-openapi-ui.version>
+        <springdoc-openapi.version>1.6.2</springdoc-openapi.version>
         <swagger-maven-plugin.version>2.1.11</swagger-maven-plugin.version>
         <!-- LOMBOK -->
         <lombok.version>1.18.22</lombok.version>
@@ -42,6 +43,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

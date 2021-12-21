@@ -30,6 +30,12 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
+        <!-- SPRING JMS -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+
         <!-- SPRING NATIVE -->
         <dependency>
             <groupId>org.springframework.experimental</groupId>
@@ -37,19 +43,21 @@
             <version>0.11.0</version>
         </dependency>
 
-        <!-- OPENAPI GENERATION -->
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-maven-plugin.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- OPEN API UI -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-webflux-ui</artifactId>
-            <version>${springdoc-openapi-ui.version}</version>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springdoc</groupId>-->
+        <!--            <artifactId>springdoc-openapi-security</artifactId>-->
+        <!--            <version>${springdoc-openapi.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-native</artifactId>
+            <version>${springdoc-openapi.version}</version>
         </dependency>
 
         <!-- LOMBOK -->
