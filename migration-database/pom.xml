@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>science.monke</groupId>
-        <artifactId>quarkus-reference-project</artifactId>
+        <artifactId>spring-native-reference-project</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
