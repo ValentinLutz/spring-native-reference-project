@@ -1,7 +1,6 @@
 spring:
-  data:
-    rest:
-      base-path: /api
+  webflux:
+    base-path: /api
 
 springdoc:
   swagger-ui:

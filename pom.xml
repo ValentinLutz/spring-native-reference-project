@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,6 +12,7 @@
 
     <modules>
         <module>app-java</module>
+        <module>test-integration</module>
     </modules>
 
     <properties>
@@ -35,6 +36,10 @@
         <swagger-maven-plugin.version>2.1.11</swagger-maven-plugin.version>
         <!-- LOMBOK -->
         <lombok.version>1.18.22</lombok.version>
+        <!-- JUNIT 5-->
+        <junit.jupiter.version>5.8.1</junit.jupiter.version>
+        <!-- REST ASSURED -->
+        <rest-assured.version>4.4.0</rest-assured.version>
     </properties>
 
     <dependencyManagement>
@@ -51,6 +56,14 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
                 <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.jupiter.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
