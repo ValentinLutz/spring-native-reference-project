@@ -3,7 +3,8 @@ help::
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 
-project-name = spring-native-reference-project
+PROJECT_NAME ?= spring-native-reference-project
+MAVEN_PROFILE ?= dev
 
 
 clean:: ## clean all maven modules
@@ -26,35 +27,47 @@ build-java-native:: ## build native image
 
 
 
-dev-docker-up:: ## start docker containers
-	docker-compose -p ${project-name} \
-		-f deployment-local/docker-compose.yaml \
+deploy-docker-up:: ## start docker containers
+	docker-compose -p ${PROJECT_NAME} \
+		-f deployment-docker/docker-compose.yaml \
 		up -d
 
-dev-docker-down:: ## shutdown docker containers
-	docker-compose -p ${project-name} \
-		-f deployment-local/docker-compose.yaml \
+deploy-docker-down:: ## shutdown docker containers
+	docker-compose -p ${PROJECT_NAME} \
+		-f deployment-docker/docker-compose.yaml \
 		 down
 
-dev-docker-java:: ## run spring java native image
+deploy-docker-java-native:: ## run spring java native image
 	docker run \
-		--name ${project-name} \
+		--name ${PROJECT_NAME} \
 		-p 8080:8080 app-java:1.0.0-SNAPSHOT \
 			-Dspring.profiles.active="dev"
 
-dev-migrate:: ## execute flyway database migration
+
+
+migrate-db:: ## execute flyway database migration
 	./mvnw flyway:migrate \
 		-f migration-database \
 		-P dev \
 		-Dflyway.user=dev_user \
 		-Dflyway.password=dev_password
 
-dev-java:: ## run spring java app
+
+
+app-java:: ## run spring java app
 	./mvnw spring-boot:run \
 		-pl app-java \
-		-P dev
+		-P ${MAVEN_PROFILE}
 
-dev-it:: ## run integration tests with spring rest docs
+
+test-st:: ## run smoke tests
+	./mvnw package \
+		-pl test-smoke \
+		-P it \
+		-P ${MAVEN_PROFILE}
+
+test-it:: ## run integration tests with spring rest docs
 	./mvnw package \
 		-pl test-integration \
-		-P dev
+		-P it \
+		-P ${MAVEN_PROFILE}
