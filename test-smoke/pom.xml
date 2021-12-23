@@ -15,6 +15,14 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- CONFIG -->
+        <dependency>
+            <groupId>science.monke</groupId>
+            <artifactId>config</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- REST ASSURED -->
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -49,6 +57,9 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skip>${skipSmokeTests}</skip>
+                    <systemPropertyVariables>
+                        <environment>${environment}</environment>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

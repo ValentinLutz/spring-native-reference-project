@@ -118,7 +118,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <profiles>
-                        <profile>${profile}</profile>
+                        <profile>${environment}</profile>
                     </profiles>
                     <image>
                         <builder>paketobuildpacks/builder:tiny</builder>

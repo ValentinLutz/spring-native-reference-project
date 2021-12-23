@@ -11,6 +11,10 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.operation.preprocess.Preprocessors;
 import org.springframework.restdocs.restassured3.RestAssuredRestDocumentation;
+import science.monke.ConfigLoader;
+import science.monke.enitity.Config;
+
+import java.io.IOException;
 
 @ExtendWith({RestDocumentationExtension.class})
 class OrderAPITest {
@@ -18,10 +22,12 @@ class OrderAPITest {
   private RequestSpecification requestSpecification;
 
   @BeforeAll
-  static void beforeAll() {
+  static void beforeAll() throws IOException {
     RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-    RestAssured.baseURI = "http://localhost:8080";
-    RestAssured.basePath = "/api";
+
+    final Config config = ConfigLoader.load();
+    RestAssured.baseURI = config.getBaseUri();
+    RestAssured.basePath = config.getBasePath();
   }
 
   @BeforeEach

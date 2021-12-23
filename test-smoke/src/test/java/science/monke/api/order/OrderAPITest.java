@@ -3,14 +3,20 @@ package science.monke.api.order;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import science.monke.ConfigLoader;
+import science.monke.enitity.Config;
+
+import java.io.IOException;
 
 class OrderAPITest {
 
   @BeforeAll
-  static void beforeAll() {
+  static void beforeAll() throws IOException {
     RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-    RestAssured.baseURI = "http://localhost:8080";
-    RestAssured.basePath = "/api";
+
+    final Config config = ConfigLoader.load();
+    RestAssured.baseURI = config.getBaseUri();
+    RestAssured.basePath = config.getBasePath();
   }
 
   @Test

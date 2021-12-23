@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>config</module>
         <module>app-java</module>
         <module>test-smoke</module>
         <module>test-integration</module>
@@ -44,6 +45,8 @@
         <rest-assured.version>4.4.0</rest-assured.version>
         <!-- SPRING REST DOCS -->
         <spring-resdocs.version>2.0.5.RELEASE</spring-resdocs.version>
+        <!-- JACKSON -->
+        <jackson.version>2.13.1</jackson.version>
 
         <!-- Test execution config, will be overwritten by profiles -->
         <skipUnitTests>false</skipUnitTests>
@@ -65,16 +68,24 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
                 <version>${spring.version}</version>
-                <type>pom</type>
                 <scope>import</scope>
+                <type>pom</type>
             </dependency>
 
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit.jupiter.version}</version>
-                <type>pom</type>
                 <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -102,7 +113,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <profile>dev</profile>
+                <environment>dev</environment>
             </properties>
         </profile>
 
