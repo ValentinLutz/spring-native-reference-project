@@ -53,3 +53,8 @@ dev-java:: ## run spring java app
 	./mvnw spring-boot:run \
 		-pl app-java \
 		-P dev
+
+dev-it:: ## run integration tests with spring rest docs
+	./mvnw package \
+		-pl test-integration \
+		-P dev
