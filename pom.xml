@@ -15,6 +15,7 @@
         <module>app-java</module>
         <module>test-smoke</module>
         <module>test-integration</module>
+        <module>test-load</module>
     </modules>
 
     <properties>
@@ -47,11 +48,15 @@
         <spring-resdocs.version>2.0.5.RELEASE</spring-resdocs.version>
         <!-- JACKSON -->
         <jackson.version>2.13.1</jackson.version>
+        <!-- GATLING -->
+        <gatling.version>3.7.3</gatling.version>
+        <gatling-maven-plugin.version>4.0.1</gatling-maven-plugin.version>
 
         <!-- Test execution config, will be overwritten by profiles -->
         <skipUnitTests>false</skipUnitTests>
         <skipSmokeTests>true</skipSmokeTests>
         <skipIntegrationTests>true</skipIntegrationTests>
+        <skipLoadTests>true</skipLoadTests>
     </properties>
 
     <dependencyManagement>
@@ -123,6 +128,7 @@
                 <skipUnitTests>true</skipUnitTests>
                 <skipSmokeTests>false</skipSmokeTests>
                 <skipIntegrationTests>true</skipIntegrationTests>
+                <skipLoadTests>true</skipLoadTests>
             </properties>
             <modules>
                 <module>test-smoke</module>
@@ -135,9 +141,23 @@
                 <skipUnitTests>true</skipUnitTests>
                 <skipSmokeTests>true</skipSmokeTests>
                 <skipIntegrationTests>false</skipIntegrationTests>
+                <skipLoadTests>true</skipLoadTests>
             </properties>
             <modules>
                 <module>test-integration</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>lt</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipSmokeTests>true</skipSmokeTests>
+                <skipIntegrationTests>true</skipIntegrationTests>
+                <skipLoadTests>false</skipLoadTests>
+            </properties>
+            <modules>
+                <module>test-load</module>
             </modules>
         </profile>
     </profiles>

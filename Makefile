@@ -112,7 +112,16 @@ test-it:: ## run integration tests with spring rest docs
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
+test-lt:: ## run integration tests with spring rest docs
+	./mvnw test \
+		-pl test-load \
+		-am \
+		-P lt \
+		-P ${MAVEN_PROFILE} \
+		${MAVEN_ARGS}
+
 test-st-full:: deploy-docker-up migrate-db app-java-start test-st app-java-stop ## run smoke tests with starting and stopping containers and app
 
 test-it-full:: deploy-docker-up migrate-db app-java-start test-it app-java-stop ## run integration tests with spring rest docs with starting and stopping containers and app
 
+test-lt-full:: deploy-docker-up migrate-db app-java-start test-lt app-java-stop ## run load tests with starting and stopping containers and app

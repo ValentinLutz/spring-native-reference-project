@@ -1,12 +1,12 @@
 package science.monke.api.order.entity;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
 
 import java.util.List;
 
-@Getter
+@Value
 @Builder
 public class NewOrderDTO {
-  private List<String> items;
+  List<String> items;
 }

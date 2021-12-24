@@ -17,7 +17,7 @@ public class ConfigLoader {
   }
 
   public static Config load(final String environment) throws IOException {
-    final String configName = String.format("/application-%s.yaml", environment);
+    final String configName = String.format("/%s.yaml", environment);
     final InputStream resourceAsStream = ConfigLoader.class.getResourceAsStream(configName);
     final ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
     return objectMapper.readValue(resourceAsStream, Config.class);

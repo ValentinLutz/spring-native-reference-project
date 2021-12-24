@@ -1,10 +1,10 @@
 package science.monke.api.order.entity;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
+@Value
 @Builder
 public class OrderItemDTO {
-  private String name;
+  String name;
 }

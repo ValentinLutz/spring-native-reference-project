@@ -43,7 +43,7 @@ public class OrderAPI {
   @ApiResponse(
       responseCode = "201",
       content = @Content(schema = @Schema(implementation = OrderDTO.class)))
-  public Mono<OrderDTO> postOrder(final NewOrderDTO newOrder) {
+  public Mono<OrderDTO> postOrder(@RequestParam final NewOrderDTO newOrder) {
     return Mono.just(OrderDTO.builder().orderId(UUID.randomUUID()).build());
   }
 

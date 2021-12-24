@@ -1,15 +1,15 @@
 package science.monke.api.order.entity;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
 
 import java.util.List;
 import java.util.UUID;
 
-@Getter
+@Value
 @Builder
 public class OrderDTO {
-  private OrderStatusDTO status;
-  private UUID orderId;
-  private List<OrderItemDTO> items;
+  OrderStatusDTO status;
+  UUID orderId;
+  List<OrderItemDTO> items;
 }
