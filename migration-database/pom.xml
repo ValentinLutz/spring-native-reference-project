@@ -14,38 +14,6 @@
     <artifactId>migration-database</artifactId>
     <packaging>jar</packaging>
 
-    <profiles>
-        <profile>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <id>dev</id>
-            <properties>
-                <environment>dev</environment>
-                <jdbc.url>jdbc:postgresql://localhost:5432/dev_db</jdbc.url>
-                <flyway.cleanOnValidationError>true</flyway.cleanOnValidationError>
-                <flyway.cleanDisabled>false</flyway.cleanDisabled>
-            </properties>
-        </profile>
-        <profile>
-            <id>int</id>
-            <properties>
-                <environment>int</environment>
-                <jdbc.url></jdbc.url>
-                <flyway.cleanOnValidationError>true</flyway.cleanOnValidationError>
-                <flyway.cleanDisabled>false</flyway.cleanDisabled>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <environment>prod</environment>
-                <jdbc.url></jdbc.url>
-                <flyway.cleanDisabled>true</flyway.cleanDisabled>
-            </properties>
-        </profile>
-    </profiles>
-
     <properties>
         <flyway-plugin.version>7.9.2</flyway-plugin.version>
         <postgresql.version>42.3.1</postgresql.version>
@@ -65,7 +33,7 @@
                     <user>${flyway.user}</user>
                     <password>${flyway.password}</password>
                     <schemas>
-                        <schema>quarkus_reference_project</schema>
+                        <schema>spring_native_reference_project</schema>
                     </schemas>
                     <cleanOnValidationError>${flyway.cleanOnValidationError}</cleanOnValidationError>
                     <cleanDisabled>${flyway.cleanDisabled}</cleanDisabled>

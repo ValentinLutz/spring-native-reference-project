@@ -13,10 +13,65 @@
     <modules>
         <module>config</module>
         <module>app-java</module>
+        <module>migration-database</module>
         <module>test-smoke</module>
         <module>test-integration</module>
         <module>test-load</module>
     </modules>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <environment>dev</environment>
+                <jdbc.url>jdbc:postgresql://localhost:5432/dev_db</jdbc.url>
+                <flyway.cleanOnValidationError>true</flyway.cleanOnValidationError>
+                <flyway.cleanDisabled>false</flyway.cleanDisabled>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>st</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipSmokeTests>false</skipSmokeTests>
+                <skipIntegrationTests>true</skipIntegrationTests>
+                <skipLoadTests>true</skipLoadTests>
+            </properties>
+            <modules>
+                <module>test-smoke</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>it</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipSmokeTests>true</skipSmokeTests>
+                <skipIntegrationTests>false</skipIntegrationTests>
+                <skipLoadTests>true</skipLoadTests>
+            </properties>
+            <modules>
+                <module>test-integration</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>lt</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipSmokeTests>true</skipSmokeTests>
+                <skipIntegrationTests>true</skipIntegrationTests>
+                <skipLoadTests>false</skipLoadTests>
+            </properties>
+            <modules>
+                <module>test-load</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <properties>
         <!-- MAVEN -->
@@ -113,56 +168,5 @@
             <url>https://repo.spring.io/release</url>
         </pluginRepository>
     </pluginRepositories>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <environment>dev</environment>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>st</id>
-            <properties>
-                <skipUnitTests>true</skipUnitTests>
-                <skipSmokeTests>false</skipSmokeTests>
-                <skipIntegrationTests>true</skipIntegrationTests>
-                <skipLoadTests>true</skipLoadTests>
-            </properties>
-            <modules>
-                <module>test-smoke</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>it</id>
-            <properties>
-                <skipUnitTests>true</skipUnitTests>
-                <skipSmokeTests>true</skipSmokeTests>
-                <skipIntegrationTests>false</skipIntegrationTests>
-                <skipLoadTests>true</skipLoadTests>
-            </properties>
-            <modules>
-                <module>test-integration</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>lt</id>
-            <properties>
-                <skipUnitTests>true</skipUnitTests>
-                <skipSmokeTests>true</skipSmokeTests>
-                <skipIntegrationTests>true</skipIntegrationTests>
-                <skipLoadTests>false</skipLoadTests>
-            </properties>
-            <modules>
-                <module>test-load</module>
-            </modules>
-        </profile>
-    </profiles>
 
 </project>

@@ -8,8 +8,8 @@ PROJECT_NAME ?= spring-native-reference-project
 MAVEN_PROFILE ?= dev
 MAVEN_ARGS ?=
 MAVEN_THREAD_ARGS ?= -T 1C
-FLYWAY_USER ?= dev_user
-FLYWAY_PASSWORD ?= dev_password
+FLYWAY_USER ?= test
+FLYWAY_PASSWORD ?= test
 
 
 
@@ -62,11 +62,10 @@ deploy-docker-java-native:: ## run spring java native image
 
 
 
-migrate-db:: ## execute flyway database migration
+migrate-db:: ## migrate database
 	./mvnw flyway:migrate \
-		-f migration-database \
+		-pl migration-database \
 		-P dev \
-		-am \
 		-Dflyway.user=${FLYWAY_USER} \
 		-Dflyway.password=${FLYWAY_PASSWORD} \
 		${MAVEN_THREAD_ARGS} \
