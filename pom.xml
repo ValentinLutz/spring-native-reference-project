@@ -13,7 +13,6 @@
     <modules>
         <module>config</module>
         <module>app-java</module>
-        <module>app-kotlin</module>
         <module>test-smoke</module>
         <module>test-integration</module>
         <module>test-load</module>

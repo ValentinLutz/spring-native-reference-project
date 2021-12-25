@@ -1,7 +1,0 @@
-spring:
-  webflux:
-    base-path: /api
-
-springdoc:
-  swagger-ui:
-    path: /api

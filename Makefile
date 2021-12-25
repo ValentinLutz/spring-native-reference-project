@@ -94,26 +94,6 @@ app-java-stop:: ## stop spring java app in background
 
 
 
-app-kotlin-run:: compile ## run spring java app
-	./mvnw spring-boot:run \
-		-pl app-kotlin \
-		-P ${MAVEN_PROFILE} \
-		${MAVEN_ARGS}
-
-app-kotlin-start:: compile ## start spring java app in background
-	./mvnw spring-boot:start \
-		-pl app-kotlin \
-		-P ${MAVEN_PROFILE} \
-		${MAVEN_ARGS}
-
-app-kotlin-stop:: ## stop spring java app in background
-	./mvnw spring-boot:stop \
-		-pl app-kotlin \
-		-P ${MAVEN_PROFILE} \
-		${MAVEN_ARGS}
-
-
-
 test-st:: ## run smoke tests
 	./mvnw test \
 		-pl test-smoke \
