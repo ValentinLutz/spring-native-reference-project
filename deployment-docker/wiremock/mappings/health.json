@@ -5,6 +5,6 @@
   },
   "response": {
     "status": 200,
-    "body": "{ ok }"
+    "bodyFileName": "health-response.json"
   }
 }
