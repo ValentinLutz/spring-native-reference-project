@@ -1,10 +1,10 @@
 {
   "request": {
     "method": "GET",
-    "url": "/mock/ping"
+    "url": "/health"
   },
   "response": {
     "status": 200,
-    "body": "pong"
+    "body": "{ ok }"
   }
 }

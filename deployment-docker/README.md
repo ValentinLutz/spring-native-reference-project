@@ -2,7 +2,7 @@
 
 ## wiremock
 
-http://localhost:9080/__admin
+http://localhost:8081/__admin
 
 ## localstack
 

@@ -8,8 +8,8 @@ services:
     hostname: postgresql
     environment:
       POSTGRES_DB: dev_db
-      POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: dev_password
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready" ]
     ports:
@@ -23,6 +23,8 @@ services:
       - --verbose
     volumes:
       - ./wiremock/:/home/wiremock:ro
+    healthcheck:
+      test: curl --fail http://localhost:8081/health
     ports:
       - '8081:8080'
 
