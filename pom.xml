@@ -13,6 +13,7 @@
     <modules>
         <module>config</module>
         <module>app-java</module>
+        <module>app-kotlin</module>
         <module>test-smoke</module>
         <module>test-integration</module>
         <module>test-load</module>
@@ -27,8 +28,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <!-- KOTLIN -->
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <!-- SPRING BOOT -->
         <java.version>17</java.version>
+        <kotlin.version>1.6.10</kotlin.version>
         <spring-boot.version>2.6.1</spring-boot.version>
         <spring.version>5.3.14</spring.version>
         <!-- SPRING NATIVE -->
