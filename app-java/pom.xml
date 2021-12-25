@@ -31,6 +31,12 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
+        <!-- SPRING ACTUATOR -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- SPRING JMS -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -41,7 +47,7 @@
         <dependency>
             <groupId>org.springframework.experimental</groupId>
             <artifactId>spring-native</artifactId>
-            <version>0.11.0</version>
+            <version>${spring-native.version}</version>
         </dependency>
 
         <!-- OPEN API UI -->

@@ -8,7 +8,7 @@ import science.monke.enitity.Config;
 
 import java.io.IOException;
 
-class OrderAPITest {
+class OrderIntegrationTest {
 
   @BeforeAll
   static void beforeAll() throws IOException {

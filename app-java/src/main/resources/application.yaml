@@ -4,4 +4,10 @@ spring:
 
 springdoc:
   swagger-ui:
-    path: /api
+    path: /swagger
+  show-actuator: true
+
+server:
+  error:
+    whitelabel:
+      enabled: false

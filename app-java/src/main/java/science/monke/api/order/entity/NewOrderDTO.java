@@ -4,7 +4,10 @@ import lombok.Builder;
 
 import java.util.List;
 
-@Builder
 public record NewOrderDTO(
         List<String> items
-) {}
+) {
+    // Can be moved to class level if IntelliJ plugin works
+    @Builder
+    public NewOrderDTO{}
+}

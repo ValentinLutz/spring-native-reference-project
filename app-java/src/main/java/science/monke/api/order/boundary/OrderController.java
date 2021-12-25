@@ -16,14 +16,14 @@ import science.monke.api.order.entity.OrderDTO;
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "Orders")
+@Tag(name = "order")
 @RestController
 @RequestMapping("/orders")
-public class OrderAPI {
+public class OrderController {
   private final OrderService orderService;
 
   @Autowired
-  public OrderAPI(final OrderService orderService) {
+  public OrderController(final OrderService orderService) {
     this.orderService = orderService;
   }
 
@@ -51,7 +51,7 @@ public class OrderAPI {
   @ApiResponse(
       responseCode = "200",
       content = @Content(schema = @Schema(implementation = OrderDTO.class)))
-  public Mono<OrderDTO> getOrder(@PathVariable(value = "orderId") final int orderId) {
+  public Mono<OrderDTO> getOrder(@PathVariable final int orderId) {
     return Mono.just(OrderDTO.builder().orderId(UUID.randomUUID()).build());
   }
 }

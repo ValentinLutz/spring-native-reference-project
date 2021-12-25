@@ -17,7 +17,7 @@ import science.monke.enitity.Config;
 import java.io.IOException;
 
 @ExtendWith({RestDocumentationExtension.class})
-class OrderAPIRestDocsTest {
+class OrderRestDocsIntegrationTest {
 
   private RequestSpecification requestSpecification;
 
