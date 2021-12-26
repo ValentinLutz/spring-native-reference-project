@@ -2,3 +2,12 @@ logging:
   level:
     root: info
     web: info
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432
+    name: dev_db
+    properties:
+      schema: spring_native_reference_project
+    username: test
+    password: test

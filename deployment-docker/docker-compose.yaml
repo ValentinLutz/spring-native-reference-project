@@ -10,8 +10,6 @@ services:
       POSTGRES_DB: dev_db
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
     ports:
       - '5432:5432'
 
@@ -23,8 +21,6 @@ services:
       - --verbose
     volumes:
       - ./wiremock/:/home/wiremock:ro
-    healthcheck:
-      test: curl --fail http://localhost:8081/health
     ports:
       - '8081:8080'
 

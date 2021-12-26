@@ -73,13 +73,13 @@ migrate-db:: ## migrate database
 
 
 
-app-java-run:: compile ## run spring java app
+app-java-run:: clean compile ## run spring java app
 	./mvnw spring-boot:run \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_ARGS}
 
-app-java-start:: compile ## start spring java app in background
+app-java-start:: clean compile ## start spring java app in background
 	./mvnw spring-boot:start \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \

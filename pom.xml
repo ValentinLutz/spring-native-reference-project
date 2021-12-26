@@ -82,15 +82,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <!-- KOTLIN -->
-        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
-        <!-- SPRING BOOT -->
+        <!-- SPRING -->
         <java.version>17</java.version>
-        <kotlin.version>1.6.10</kotlin.version>
         <spring-boot.version>2.6.1</spring-boot.version>
         <spring.version>5.3.14</spring.version>
-        <!-- SPRING NATIVE -->
+        <spring-data.version>2021.1.0</spring-data.version>
         <spring-native.version>0.11.0</spring-native.version>
+        <spring-resdocs.version>2.0.5.RELEASE</spring-resdocs.version>
         <!-- SUREFIRE -->
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <!-- OPENAPI -->
@@ -102,8 +100,6 @@
         <junit.jupiter.version>5.8.1</junit.jupiter.version>
         <!-- REST ASSURED -->
         <rest-assured.version>4.4.0</rest-assured.version>
-        <!-- SPRING REST DOCS -->
-        <spring-resdocs.version>2.0.5.RELEASE</spring-resdocs.version>
         <!-- JACKSON -->
         <jackson.version>2.13.1</jackson.version>
         <!-- GATLING -->
@@ -136,6 +132,14 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-bom</artifactId>
+                <version>${spring-data.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit.jupiter.version}</version>
@@ -147,7 +151,7 @@
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>${jackson.version}</version>
-
+                <scope>import</scope>
                 <type>pom</type>
             </dependency>
         </dependencies>

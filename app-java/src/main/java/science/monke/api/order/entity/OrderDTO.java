@@ -10,6 +10,7 @@ public record OrderDTO(
         UUID orderId,
         List<OrderItemDTO> items
 ) {
+    // Can be moved to class level if IntelliJ plugin works
     @Builder
     public OrderDTO{}
 }

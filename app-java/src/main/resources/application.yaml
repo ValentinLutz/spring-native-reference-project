@@ -7,6 +7,13 @@ springdoc:
     path: /swagger
   show-actuator: true
 
+management:
+  endpoint:
+    health:
+      show-details: always
+
+
+
 server:
   error:
     whitelabel:

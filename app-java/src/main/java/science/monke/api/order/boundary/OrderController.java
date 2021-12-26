@@ -8,12 +8,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import science.monke.api.order.control.OrderService;
 import science.monke.api.order.entity.NewOrderDTO;
 import science.monke.api.order.entity.OrderDTO;
 
-import java.util.List;
 import java.util.UUID;
 
 @Tag(name = "order")
@@ -31,11 +31,8 @@ public class OrderController {
   @ApiResponse(
       responseCode = "200",
       content = @Content(array = @ArraySchema(schema = @Schema(implementation = OrderDTO.class))))
-  public Mono<List<OrderDTO>> getOrders() {
-    return Mono.just(
-        List.of(
-            OrderDTO.builder().orderId(UUID.randomUUID()).build(),
-            OrderDTO.builder().orderId(UUID.randomUUID()).build()));
+  public Flux<OrderDTO> getOrders() {
+    return orderService.getOrders();
   }
 
   @PostMapping
@@ -51,7 +48,7 @@ public class OrderController {
   @ApiResponse(
       responseCode = "200",
       content = @Content(schema = @Schema(implementation = OrderDTO.class)))
-  public Mono<OrderDTO> getOrder(@PathVariable final int orderId) {
-    return Mono.just(OrderDTO.builder().orderId(UUID.randomUUID()).build());
+  public Mono<OrderDTO> getOrder(@PathVariable final UUID orderId) {
+    return orderService.getOrder(orderId);
   }
 }
