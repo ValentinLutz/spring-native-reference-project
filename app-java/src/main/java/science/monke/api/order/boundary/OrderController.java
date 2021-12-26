@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import science.monke.api.order.control.OrderService;
-import science.monke.api.order.entity.NewOrderDTO;
-import science.monke.api.order.entity.OrderDTO;
+import science.monke.api.order.entity.OrderRequest;
+import science.monke.api.order.entity.OrderResponse;
+import science.monke.spring.exceptions.HttpNotFound;
 
 import java.util.UUID;
 
@@ -30,25 +31,26 @@ public class OrderController {
   @GetMapping
   @ApiResponse(
       responseCode = "200",
-      content = @Content(array = @ArraySchema(schema = @Schema(implementation = OrderDTO.class))))
-  public Flux<OrderDTO> getOrders() {
-    return orderService.getOrders();
+      content =
+          @Content(array = @ArraySchema(schema = @Schema(implementation = OrderResponse.class))))
+  public Flux<OrderResponse> getOrders() {
+    return orderService.getOrders().switchIfEmpty(Flux.error(HttpNotFound::new));
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   @ApiResponse(
       responseCode = "201",
-      content = @Content(schema = @Schema(implementation = OrderDTO.class)))
-  public Mono<OrderDTO> postOrder(@RequestParam final NewOrderDTO newOrder) {
-    return Mono.just(OrderDTO.builder().orderId(UUID.randomUUID()).build());
+      content = @Content(schema = @Schema(implementation = OrderResponse.class)))
+  public Mono<OrderResponse> postOrder(@RequestParam final OrderRequest orderRequest) {
+    return Mono.empty();
   }
 
   @GetMapping("/{orderId}")
   @ApiResponse(
       responseCode = "200",
-      content = @Content(schema = @Schema(implementation = OrderDTO.class)))
-  public Mono<OrderDTO> getOrder(@PathVariable final UUID orderId) {
-    return orderService.getOrder(orderId);
+      content = @Content(schema = @Schema(implementation = OrderResponse.class)))
+  public Mono<OrderResponse> getOrder(@PathVariable final UUID orderId) {
+    return orderService.getOrder(orderId).switchIfEmpty(Mono.error(HttpNotFound::new));
   }
 }

@@ -31,6 +31,6 @@ class OrderSmokeTest {
 
   @Test
   void getOrder() {
-    RestAssured.when().get("/orders/1234").then().statusCode(200);
+    RestAssured.when().get("/orders/3412c520-57bc-4b8d-b012-ddd2d03883d4").then().statusCode(200);
   }
 }

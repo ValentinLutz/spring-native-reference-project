@@ -2,10 +2,10 @@ package science.monke.api.order.entity;
 
 import lombok.Builder;
 
-public record OrderItemDTO(
+public record OrderItemResponse(
         String name
 ) {
     // Can be moved to class level if IntelliJ plugin works
     @Builder
-    public OrderItemDTO{}
+    public OrderItemResponse {}
 }
