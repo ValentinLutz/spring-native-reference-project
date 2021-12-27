@@ -14,11 +14,11 @@ public class OrderItemMapper {
   }
 
   public OrderItemEntity orderItemRequestToOrderItemEntity(
-          final String name, final OrderEntity orderEntity) {
+      final String name, final OrderEntity orderEntity) {
     return OrderItemEntity.builder()
         .itemName(name)
         .creationDate(orderEntity.getCreationDate())
-        .orderId(orderEntity.getOrderId())
+        .order(orderEntity)
         .build();
   }
 }

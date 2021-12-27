@@ -1,26 +1,32 @@
 package science.monke.internal.order.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.*;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Builder
-@Table(value = "order_item")
-public class OrderItemEntity {
-  @Id private long id;
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "order_item")
+public class OrderItemEntity implements Serializable {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-  @Column(value = "creation_date")
+  @Column(name = "creation_date")
   private OffsetDateTime creationDate;
 
-  @Column(value = "order_id")
-  private UUID orderId;
+  @ToString.Exclude
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+  private OrderEntity order;
 
-  @Column(value = "item_name")
+  @Column(name = "item_name")
   private String itemName;
 }

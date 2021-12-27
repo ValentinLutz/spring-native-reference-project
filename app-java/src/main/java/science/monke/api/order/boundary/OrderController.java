@@ -13,7 +13,7 @@ import science.monke.api.order.control.OrderService;
 import science.monke.api.order.entity.OrderRequest;
 import science.monke.api.order.entity.OrderResponse;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Tag(name = "order")
@@ -32,8 +32,8 @@ public class OrderController {
       responseCode = "200",
       content =
           @Content(array = @ArraySchema(schema = @Schema(implementation = OrderResponse.class))))
-  public List<OrderResponse> getOrders() {
-    final List<OrderResponse> orders = orderService.getOrders();
+  public Set<OrderResponse> getOrders() {
+    final Set<OrderResponse> orders = orderService.getOrders();
     if (orders.isEmpty()) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
