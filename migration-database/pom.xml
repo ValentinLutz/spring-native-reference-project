@@ -35,7 +35,6 @@
                     <schemas>
                         <schema>spring_native_reference_project</schema>
                     </schemas>
-                    <cleanOnValidationError>${flyway.cleanOnValidationError}</cleanOnValidationError>
                     <cleanDisabled>${flyway.cleanDisabled}</cleanDisabled>
                     <locations>
                         <location>filesystem:src/main/resources/migration</location>

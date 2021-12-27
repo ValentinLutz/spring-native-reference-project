@@ -63,7 +63,8 @@ deploy-docker-java-native:: ## run spring java native image
 
 
 migrate-db:: ## migrate database
-	./mvnw flyway:migrate \
+	./mvnw flyway:clean \
+		flyway:migrate \
 		-pl migration-database \
 		-P dev \
 		-Dflyway.user=${FLYWAY_USER} \

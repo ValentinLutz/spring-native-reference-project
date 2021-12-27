@@ -4,10 +4,9 @@ logging:
     web: info
 
 spring:
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432
-    name: dev_db
-    properties:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dev_db
+    hikari:
       schema: spring_native_reference_project
     username: test
     password: test

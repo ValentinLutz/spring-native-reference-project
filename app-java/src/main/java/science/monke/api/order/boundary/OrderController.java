@@ -8,13 +8,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.web.server.ResponseStatusException;
 import science.monke.api.order.control.OrderService;
 import science.monke.api.order.entity.OrderRequest;
 import science.monke.api.order.entity.OrderResponse;
-import science.monke.spring.exceptions.HttpNotFound;
 
+import java.util.List;
 import java.util.UUID;
 
 @Tag(name = "order")
@@ -33,8 +32,12 @@ public class OrderController {
       responseCode = "200",
       content =
           @Content(array = @ArraySchema(schema = @Schema(implementation = OrderResponse.class))))
-  public Flux<OrderResponse> getOrders() {
-    return orderService.getOrders().switchIfEmpty(Flux.error(HttpNotFound::new));
+  public List<OrderResponse> getOrders() {
+    final List<OrderResponse> orders = orderService.getOrders();
+    if (orders.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+    return orders;
   }
 
   @PostMapping
@@ -42,15 +45,17 @@ public class OrderController {
   @ApiResponse(
       responseCode = "201",
       content = @Content(schema = @Schema(implementation = OrderResponse.class)))
-  public Mono<OrderResponse> postOrder(@RequestParam final OrderRequest orderRequest) {
-    return Mono.empty();
+  public OrderResponse postOrder(@RequestBody final OrderRequest orderRequest) {
+    return orderService.postOrders(orderRequest);
   }
 
   @GetMapping("/{orderId}")
   @ApiResponse(
       responseCode = "200",
       content = @Content(schema = @Schema(implementation = OrderResponse.class)))
-  public Mono<OrderResponse> getOrder(@PathVariable final UUID orderId) {
-    return orderService.getOrder(orderId).switchIfEmpty(Mono.error(HttpNotFound::new));
+  public OrderResponse getOrder(@PathVariable final UUID orderId) {
+    return orderService
+        .getOrder(orderId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
   }
 }

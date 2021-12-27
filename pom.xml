@@ -28,7 +28,6 @@
             <properties>
                 <environment>dev</environment>
                 <jdbc.url>jdbc:postgresql://localhost:5432/dev_db</jdbc.url>
-                <flyway.cleanOnValidationError>true</flyway.cleanOnValidationError>
                 <flyway.cleanDisabled>false</flyway.cleanDisabled>
             </properties>
         </profile>

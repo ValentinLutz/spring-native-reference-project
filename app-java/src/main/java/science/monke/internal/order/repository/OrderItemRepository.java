@@ -1,12 +1,11 @@
 package science.monke.internal.order.repository;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import reactor.core.publisher.Flux;
-import science.monke.internal.order.entity.OrderEntity;
+import org.springframework.data.repository.CrudRepository;
 import science.monke.internal.order.entity.OrderItemEntity;
 
+import java.util.Set;
 import java.util.UUID;
 
-public interface OrderItemRepository extends ReactiveCrudRepository<OrderItemEntity, Long> {
-  Flux<OrderEntity> findByOrderId(UUID orderId);
+public interface OrderItemRepository extends CrudRepository<OrderItemEntity, Long> {
+  Set<OrderItemEntity> findByOrderId(UUID orderId);
 }
