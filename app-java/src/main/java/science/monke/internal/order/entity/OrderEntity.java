@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -20,13 +19,13 @@ public class OrderEntity implements Serializable {
   @EqualsAndHashCode.Include
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private int id;
 
   @Column(name = "creation_date", nullable = false)
   private OffsetDateTime creationDate;
 
   @Column(name = "order_id", nullable = false)
-  private UUID orderId;
+  private String orderId;
 
   @Column(name = "order_status", nullable = false)
   private String orderStatus;

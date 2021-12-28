@@ -11,17 +11,19 @@ import science.monke.internal.order.entity.OrderItemEntity;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper {
 
   private final OrderItemMapper orderItemMapper;
+  private final OrderIdGenerator orderIdGenerator;
 
   @Autowired
-  public OrderMapper(final OrderItemMapper orderItemMapper) {
+  public OrderMapper(
+      final OrderItemMapper orderItemMapper, final OrderIdGenerator orderIdGenerator) {
     this.orderItemMapper = orderItemMapper;
+    this.orderIdGenerator = orderIdGenerator;
   }
 
   public OrderEntity orderRequestToOrderEntity(final OrderRequest orderRequest) {
@@ -29,7 +31,7 @@ public class OrderMapper {
         OrderEntity.builder()
             .creationDate(OffsetDateTime.now())
             .orderStatus(OrderStatus.ORDER_PLACED.name())
-            .orderId(UUID.randomUUID())
+            .orderId(orderIdGenerator.generateOrderId())
             .build();
 
     final Set<OrderItemEntity> orderItemEntities =

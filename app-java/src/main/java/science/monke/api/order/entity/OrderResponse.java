@@ -4,11 +4,10 @@ import lombok.Builder;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
-import java.util.UUID;
 
 public record OrderResponse(
         OrderStatus status,
-        UUID orderId,
+        String orderId,
         Set<OrderItemResponse> items,
         OffsetDateTime creationDate
 ) {

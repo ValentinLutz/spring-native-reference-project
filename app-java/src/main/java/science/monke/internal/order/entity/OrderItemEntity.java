@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 public class OrderItemEntity implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private int id;
 
   @Column(name = "creation_date")
   private OffsetDateTime creationDate;

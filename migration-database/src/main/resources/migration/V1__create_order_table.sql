@@ -2,7 +2,7 @@ CREATE TABLE spring_native_reference_project.order
 (
     id            INT GENERATED ALWAYS AS IDENTITY,
     creation_date TIMESTAMPTZ NOT NULL,
-    order_id      uuid        NOT NULL UNIQUE,
+    order_id      varchar(20) NOT NULL UNIQUE,
     order_status  text        NOT NULL,
     PRIMARY KEY (id)
 );

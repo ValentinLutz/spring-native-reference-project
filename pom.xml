@@ -97,6 +97,8 @@
         <lombok.version>1.18.22</lombok.version>
         <!-- JUNIT 5-->
         <junit.jupiter.version>5.8.1</junit.jupiter.version>
+        <!-- MOCKITO -->
+        <mockito.version>4.2.0</mockito.version>
         <!-- REST ASSURED -->
         <rest-assured.version>4.4.0</rest-assured.version>
         <!-- JACKSON -->

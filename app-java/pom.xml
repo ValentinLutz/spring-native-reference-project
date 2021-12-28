@@ -78,6 +78,13 @@
             <version>${spring-native.version}</version>
         </dependency>
 
+        <!-- SPRING CONFIGURATION -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- OPEN API UI -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -108,6 +115,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- SPRING TEST -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- JUNIT 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -122,6 +136,20 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- MOCKITO -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

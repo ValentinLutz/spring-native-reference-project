@@ -10,3 +10,6 @@ spring:
       schema: spring_native_reference_project
     username: test
     password: test
+
+custom:
+  region: EU
