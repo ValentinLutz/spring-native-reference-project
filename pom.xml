@@ -33,7 +33,7 @@
         </profile>
 
         <profile>
-            <id>st</id>
+            <id>smoke-test</id>
             <properties>
                 <skipUnitTests>true</skipUnitTests>
                 <skipSmokeTests>false</skipSmokeTests>
@@ -46,7 +46,7 @@
         </profile>
 
         <profile>
-            <id>it</id>
+            <id>integration-test</id>
             <properties>
                 <skipUnitTests>true</skipUnitTests>
                 <skipSmokeTests>true</skipSmokeTests>
@@ -59,7 +59,7 @@
         </profile>
 
         <profile>
-            <id>lt</id>
+            <id>load-test</id>
             <properties>
                 <skipUnitTests>true</skipUnitTests>
                 <skipSmokeTests>true</skipSmokeTests>

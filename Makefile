@@ -74,19 +74,19 @@ migrate-db:: ## migrate database
 
 
 
-app-java-run:: clean compile ## run spring java app
+app-run:: clean compile ## run spring java app
 	./mvnw spring-boot:run \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_ARGS}
 
-app-java-start:: clean compile ## start spring java app in background
+app-start:: clean compile ## start spring java app in background
 	./mvnw spring-boot:start \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_ARGS}
 
-app-java-stop:: ## stop spring java app in background
+app-stop:: ## stop spring java app in background
 	./mvnw spring-boot:stop \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \
@@ -94,34 +94,28 @@ app-java-stop:: ## stop spring java app in background
 
 
 
-test-st:: ## run smoke tests
+test-smoke:: ## run smoke tests
 	./mvnw test \
 		-pl test-smoke \
 		-am \
-		-P st \
+		-P smoke-test \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-test-it:: ## run integration tests with spring rest docs
+test-integration:: ## run integration tests with spring rest docs
 	./mvnw test \
 		-pl test-integration \
 		-am \
-		-P it \
+		-P integration-test \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-test-lt:: ## run integration tests with spring rest docs
+test-load:: ## run load tests
 	./mvnw test \
 		-pl test-load \
 		-am \
-		-P lt \
+		-P load-test \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_ARGS}
-
-test-st-full:: deploy-docker-up migrate-db app-java-start test-st app-java-stop ## run smoke tests with starting and stopping containers and app
-
-test-it-full:: deploy-docker-up migrate-db app-java-start test-it app-java-stop ## run integration tests with spring rest docs with starting and stopping containers and app
-
-test-lt-full:: deploy-docker-up migrate-db app-java-start test-lt app-java-stop ## run load tests with starting and stopping containers and app
