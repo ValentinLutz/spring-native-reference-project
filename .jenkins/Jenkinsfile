@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages {
+        stage('maven: compile') {
+            steps {
+                script {
+                    sh 'make compile'
+                }
+            }
+        }
+    }
+}
