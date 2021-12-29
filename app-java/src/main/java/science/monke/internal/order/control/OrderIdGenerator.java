@@ -4,8 +4,9 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import science.monke.internal.order.entity.Region;
 import science.monke.spring.config.CustomProperties;
+import science.monke.spring.config.Environment;
+import science.monke.spring.config.Region;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -33,10 +34,18 @@ public class OrderIdGenerator {
   public String generateOrderId(final OffsetDateTime offsetDateTime, final String salt) {
     final MessageDigest digest = MessageDigest.getInstance("SHA3-256");
     final Region region = customProperties.getRegion();
-    final String valueToHash = region.name() + offsetDateTime + salt;
+    final Environment environment = customProperties.getEnvironment();
+    final String valueToHash = region.name() + environment.name() + offsetDateTime + salt;
     final byte[] hashBytes = digest.digest((valueToHash).getBytes(StandardCharsets.UTF_8));
     final String sha3Hex = bytesToHex(hashBytes);
-    final String orderId = sha3Hex.substring(0, 8) + "-" + region + "-" + sha3Hex.substring(32, 40);
+    final String orderId =
+        sha3Hex.substring(0, 8)
+            + "-"
+            + region.name()
+            + "-"
+            + environment.name()
+            + "-"
+            + sha3Hex.substring(32, 40);
     log.info("Generated new order id: {}", orderId);
     return orderId;
   }

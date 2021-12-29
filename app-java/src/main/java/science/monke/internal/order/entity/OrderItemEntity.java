@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order_item")
+@Table(name = "order_item", schema = "spring_native_reference_project")
 public class OrderItemEntity implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

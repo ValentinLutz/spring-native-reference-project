@@ -21,13 +21,27 @@
 
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>none-dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <region>none</region>
                 <environment>dev</environment>
                 <jdbc.url>jdbc:postgresql://localhost:5432/dev_db</jdbc.url>
+                <flyway.cleanDisabled>false</flyway.cleanDisabled>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>eu-test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <region>eu</region>
+                <environment>test</environment>
+                <jdbc.url>TODO</jdbc.url>
                 <flyway.cleanDisabled>false</flyway.cleanDisabled>
             </properties>
         </profile>

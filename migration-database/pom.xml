@@ -38,7 +38,7 @@
                     <cleanDisabled>${flyway.cleanDisabled}</cleanDisabled>
                     <locations>
                         <location>filesystem:src/main/resources/migration</location>
-                        <location>filesystem:src/main/resources/${environment}</location>
+                        <location>filesystem:src/main/resources/${region}-${environment}</location>
                     </locations>
                 </configuration>
             </plugin>

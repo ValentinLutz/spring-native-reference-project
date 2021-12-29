@@ -5,7 +5,7 @@ help::
 
 
 PROJECT_NAME ?= spring-native-reference-project
-MAVEN_PROFILE ?= dev
+MAVEN_PROFILE ?= none-dev
 MAVEN_ARGS ?=
 MAVEN_THREAD_ARGS ?= -T 1C
 FLYWAY_USER ?= test
@@ -58,7 +58,7 @@ deploy-docker-java-native:: ## run spring java native image
 		--rm \
 		--name ${PROJECT_NAME} \
 		-p 8080:8080 app-java:1.0.0-SNAPSHOT \
-			-Dspring.profiles.active="dev"
+			-Dspring.profiles.active="NONE-DEV"
 
 
 
@@ -66,7 +66,7 @@ migrate-db:: ## migrate database
 	./mvnw flyway:clean \
 		flyway:migrate \
 		-pl migration-database \
-		-P dev \
+		-P ${MAVEN_PROFILE} \
 		-Dflyway.user=${FLYWAY_USER} \
 		-Dflyway.password=${FLYWAY_PASSWORD} \
 		${MAVEN_THREAD_ARGS} \

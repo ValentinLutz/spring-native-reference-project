@@ -6,10 +6,9 @@ logging:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/dev_db
-    hikari:
-      schema: spring_native_reference_project
     username: test
     password: test
 
 custom:
-  region: EU
+  region: NONE
+  environment: DEV

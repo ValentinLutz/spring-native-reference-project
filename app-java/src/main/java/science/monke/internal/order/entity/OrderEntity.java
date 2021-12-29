@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"order\"")
+@Table(name = "\"order\"", schema = "spring_native_reference_project")
 public class OrderEntity implements Serializable {
   @EqualsAndHashCode.Include
   @Id

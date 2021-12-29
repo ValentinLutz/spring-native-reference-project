@@ -1,0 +1,14 @@
+logging:
+  level:
+    root: info
+    web: info
+
+spring:
+  datasource:
+    url: TODO
+    username: TODO
+    password: TODO
+
+custom:
+  region: EU
+  environment: TEST
