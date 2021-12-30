@@ -2,16 +2,30 @@ pipeline {
     agent any
     stages {
         stage('maven: clean') {
-                    steps {
-                        script {
-                            sh 'make clean'
-                        }
-                    }
+            steps {
+                script {
+                    sh 'make clean'
                 }
+            }
+        }
         stage('maven: compile') {
             steps {
                 script {
                     sh 'make compile'
+                }
+            }
+        }
+        stage('maven: test') {
+            steps {
+                script {
+                    sh 'make test'
+                }
+            }
+        }
+        stage('spring: native') {
+            steps {
+                script {
+                    sh 'make build-java-native'
                 }
             }
         }
