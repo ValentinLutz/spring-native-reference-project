@@ -52,6 +52,9 @@ app-build-native:: ## Build native image | MAVEN_THREAD_ARGS, MAVEN_ARGS
 		${MAVEN_ARGS}
 
 app-push-native:: ## Publish native image | DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, PROJECT_NAME, VERSION
+	docker tag \
+		app-java:${VERSION} \
+		${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
 	docker login \
 		--username ${DOCKER_USERNAME} \
 		--password ${DOCKER_PASSWORD}
