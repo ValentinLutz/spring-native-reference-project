@@ -1,6 +1,6 @@
 help::
 	@egrep -h '\s##\s' $(MAKEFILE_LIST) \
-		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
+		| awk -F':.*?## | \\| ' '{printf "\033[36m%-18s \033[37m %-35s \033[35m%s \n", $$1, $$2, $$3}'
 
 
 
@@ -10,50 +10,67 @@ MAVEN_ARGS ?=
 MAVEN_THREAD_ARGS ?= -T 1C
 FLYWAY_USER ?= test
 FLYWAY_PASSWORD ?= test
+VERSION ?= 1.0.0-SNAPSHOT
+DOCKER_REPOSITORY ?= vlutz
+DOCKER_USERNAME ?=
+DOCKER_PASSWORD ?=
 
 
 
-clean:: ## clean all maven modules
+clean:: ## Clean all maven modules | MAVEN_THREAD_ARGS, MAVEN_ARGS
 	./mvnw clean \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-compile:: ## compile all maven modules
+compile:: ## Compile all maven modules | MAVEN_THREAD_ARGS, MAVEN_ARGS
 	./mvnw compile \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-test:: ## test all maven modules
+test:: ## Test all maven modules | MAVEN_THREAD_ARGS, MAVEN_ARGS
 	./mvnw test \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-package:: ## build all maven modules
+package:: ## Build all maven modules | MAVEN_THREAD_ARGS, MAVEN_ARGS
 	./mvnw package \
+		${MAVEN_THREAD_ARGS} \
+		${MAVEN_ARGS}
+
+version:: ## Set version of all maven modules | VERSION, MAVEN_THREAD_ARGS, MAVEN_ARGS
+	./mvnw versions:set \
+		-DnewVersion=${VERSION} \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
 
 
-build-java-native:: ## build native image
+app-build-native:: ## Build native image | MAVEN_THREAD_ARGS, MAVEN_ARGS
 	./mvnw spring-boot:build-image \
 		-pl app-java \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
+app-push-native:: ## Publish native image | DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, PROJECT_NAME, VERSION
+	docker login \
+		--username ${DOCKER_USERNAME} \
+		--password ${DOCKER_PASSWORD}
+	docker push \
+		${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
 
 
-deploy-docker-up:: ## start docker containers
+
+docker-up:: ## Start docker containers | PROJECT_NAME
 	docker-compose -p ${PROJECT_NAME} \
 		-f deployment-docker/docker-compose.yaml \
 		up -d
 
-deploy-docker-down:: ## shutdown docker containers
+docker-down:: ## Shutdown docker containers | PROJECT_NAME
 	docker-compose -p ${PROJECT_NAME} \
 		-f deployment-docker/docker-compose.yaml \
 		 down
 
-deploy-docker-java-native:: ## run spring java native image
+docker-app-native:: ## Run native image | PROJECT_NAME
 	docker run \
 		--rm \
 		--name ${PROJECT_NAME} \
@@ -62,7 +79,7 @@ deploy-docker-java-native:: ## run spring java native image
 
 
 
-migrate-db:: ## migrate database
+migrate-db:: ## Migrate database | MAVEN_PROFILE, FLYWAY_USER, FLYWAY_PASSWORD, MAVEN_THREAD_ARGS, MAVEN_ARGS
 	./mvnw flyway:clean \
 		flyway:migrate \
 		-pl migration-database \
@@ -74,19 +91,19 @@ migrate-db:: ## migrate database
 
 
 
-app-run:: clean compile ## run spring java app
+app-run:: ## Run app | MAVEN_PROFILE, MAVEN_ARGS
 	./mvnw spring-boot:run \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_ARGS}
 
-app-start:: clean compile ## start spring java app in background
+app-start:: ## Start app in background | MAVEN_PROFILE, MAVEN_ARGS
 	./mvnw spring-boot:start \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_ARGS}
 
-app-stop:: ## stop spring java app in background
+app-stop:: ## Stop app in background | MAVEN_PROFILE, MAVEN_ARGS
 	./mvnw spring-boot:stop \
 		-pl app-java \
 		-P ${MAVEN_PROFILE} \
@@ -94,25 +111,23 @@ app-stop:: ## stop spring java app in background
 
 
 
-test-smoke:: ## run smoke tests
+test-smoke:: ## Run smoke tests | MAVEN_PROFILE, MAVEN_ARGS
 	./mvnw test \
 		-pl test-smoke \
 		-am \
 		-P smoke-test \
 		-P ${MAVEN_PROFILE} \
-		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-test-integration:: ## run integration tests with spring rest docs
+test-integration:: ## Run integration tests | MAVEN_PROFILE, MAVEN_ARGS
 	./mvnw test \
 		-pl test-integration \
 		-am \
 		-P integration-test \
 		-P ${MAVEN_PROFILE} \
-		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-test-load:: ## run load tests
+test-load:: ## Run load tests | MAVEN_PROFILE, MAVEN_ARGS
 	./mvnw test \
 		-pl test-load \
 		-am \
