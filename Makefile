@@ -56,7 +56,8 @@ app-push-native:: ## Publish native image | DOCKER_USERNAME, DOCKER_PASSWORD, DO
 		--username ${DOCKER_USERNAME} \
 		--password ${DOCKER_PASSWORD}
 	docker push \
-		${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
+		${DOCKER_REPOSITORY}/app-java:${VERSION}
+	docker logout
 
 
 
