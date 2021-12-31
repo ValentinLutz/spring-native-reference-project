@@ -1,31 +1,53 @@
+
+def date = sh'date +"%y.%m.%d.%H%M%S"'
+
 pipeline {
     agent any
+
+    environment {
+        VERSION = date
+    }
+
     stages {
-        stage('maven: clean') {
+        stage('version') {
+            steps {
+                script {
+                    sh 'make version'
+                }
+            }
+        }
+        stage('clean') {
             steps {
                 script {
                     sh 'make clean'
                 }
             }
         }
-        stage('maven: compile') {
+        stage('compile') {
             steps {
                 script {
                     sh 'make compile'
                 }
             }
         }
-        stage('maven: test') {
+        stage('test') {
             steps {
                 script {
                     sh 'make test'
                 }
             }
         }
-        stage('spring: native') {
+        stage('build native image') {
             steps {
                 script {
-                    sh 'make build-java-native'
+                    sh 'make app-build-native'
+                }
+            }
+        }
+        stage('publish native image') {
+            steps {
+                script {
+                    sh 'make app-push-native'
                 }
             }
         }
