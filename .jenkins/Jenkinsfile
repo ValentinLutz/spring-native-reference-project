@@ -52,7 +52,19 @@ pipeline {
         stage('publish native image') {
             steps {
                 script {
-                    sh 'make app-push-native'
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh 'make app-push-native'
+                    }
+                }
+            }
+        }
+        stage('deploy to kubernetes') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'k3s-eu-test', variable: 'token')]) {
+                        sh "kubectl config use-context eu-test --token ${token}"
+                        sh 'kubectl apply -k deployment-kustomize/overlays/EU-TEST'
+                    }
                 }
             }
         }
