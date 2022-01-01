@@ -50,14 +50,19 @@ app-build-native:: ## Build native image | MAVEN_THREAD_ARGS, MAVEN_ARGS
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-app-tag-native:: ## Publish native image | DOCKER_REPOSITORY, PROJECT_NAME, VERSION
+app-tag-native:: ## Tag native image | DOCKER_REPOSITORY, PROJECT_NAME, VERSION
 	docker tag \
 		app-java:${VERSION} \
 		${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
+	docker tag \
+		app-java:${VERSION} \
+		${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${PROJECT_NAME}:latest
 
 app-push-native:: ## Publish native image | DOCKER_REPOSITORY, PROJECT_NAME, VERSION
 	docker push \
 		${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
+	docker push \
+		${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${PROJECT_NAME}:latest
 
 
 
