@@ -55,7 +55,7 @@ pipeline {
             steps {
                 script {
                     withDockerServer([uri: 'tcp://192.168.134.110:2375']) {
-                        withDockerRegistry(credentialsId: 'github-registry', url: 'ghcr.io') {
+                        withDockerRegistry(credentialsId: 'github-registry', url: 'https://ghcr.io') {
                             sh 'make app-tag-native app-push-native'
                         }
                     }
