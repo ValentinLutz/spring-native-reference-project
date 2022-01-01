@@ -11,6 +11,7 @@ MAVEN_THREAD_ARGS ?= -T 1C
 FLYWAY_USER ?= test
 FLYWAY_PASSWORD ?= test
 VERSION ?= 1.0.0-SNAPSHOT
+DOCKER_REGISTRY ?= ghcr.io
 DOCKER_REPOSITORY ?= valentinlutz
 
 
@@ -52,11 +53,11 @@ app-build-native:: ## Build native image | MAVEN_THREAD_ARGS, MAVEN_ARGS
 app-tag-native:: ## Publish native image | DOCKER_REPOSITORY, PROJECT_NAME, VERSION
 	docker tag \
 		app-java:${VERSION} \
-		${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
+		${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
 
 app-push-native:: ## Publish native image | DOCKER_REPOSITORY, PROJECT_NAME, VERSION
 	docker push \
-		${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
+		${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
 
 
 
