@@ -11,9 +11,7 @@ MAVEN_THREAD_ARGS ?= -T 1C
 FLYWAY_USER ?= test
 FLYWAY_PASSWORD ?= test
 VERSION ?= 1.0.0-SNAPSHOT
-DOCKER_REPOSITORY ?= vlutz
-DOCKER_USERNAME ?= nope
-DOCKER_PASSWORD ?= nope
+DOCKER_REPOSITORY ?= ValentinLutz
 
 
 
@@ -51,16 +49,14 @@ app-build-native:: ## Build native image | MAVEN_THREAD_ARGS, MAVEN_ARGS
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}
 
-app-push-native:: ## Publish native image | DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, PROJECT_NAME, VERSION
+app-tag-native:: ## Publish native image | DOCKER_REPOSITORY, PROJECT_NAME, VERSION
 	docker tag \
 		app-java:${VERSION} \
 		${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
-	docker login \
-		--username ${DOCKER_USERNAME} \
-		--password ${DOCKER_PASSWORD}
+
+app-push-native:: ## Publish native image | DOCKER_REPOSITORY, PROJECT_NAME, VERSION
 	docker push \
 		${DOCKER_REPOSITORY}/${PROJECT_NAME}:${VERSION}
-	docker logout
 
 
 

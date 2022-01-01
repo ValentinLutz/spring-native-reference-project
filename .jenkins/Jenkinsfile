@@ -45,28 +45,32 @@ pipeline {
         stage('build native image') {
             steps {
                 script {
-                    sh 'make app-build-native'
+                    withDockerServer([uri: 'tcp://192.168.134.110:2375']) {
+                        sh 'make app-build-native'
+                    }
                 }
             }
         }
         stage('publish native image') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        sh 'make app-push-native'
+                    withDockerServer([uri: 'tcp://192.168.134.110:2375']) {
+                        withDockerRegistry(credentialsId: 'github-registry', url: 'ghcr.io') {
+                            sh 'make app-tag-native app-push-native'
+                        }
                     }
                 }
             }
         }
-        stage('deploy to kubernetes') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'k3s-eu-test', variable: 'token')]) {
-                        sh "kubectl config use-context eu-test --token ${token}"
-                        sh 'kubectl apply -k deployment-kustomize/overlays/EU-TEST'
-                    }
-                }
-            }
-        }
+//         stage('deploy to kubernetes') {
+//             steps {
+//                 script {
+//                     withCredentials([string(credentialsId: 'k3s-eu-test', variable: 'token')]) {
+//                         sh "kubectl config use-context eu-test --token ${token}"
+//                         sh 'kubectl apply -k deployment-kustomize/overlays/EU-TEST'
+//                     }
+//                 }
+//             }
+//         }
     }
 }
