@@ -62,15 +62,15 @@ pipeline {
                 }
             }
         }
-//         stage('deploy to kubernetes') {
-//             steps {
-//                 script {
-//                     withCredentials([string(credentialsId: 'k3s-eu-test', variable: 'token')]) {
-//                         sh "kubectl config use-context eu-test --token ${token}"
-//                         sh 'kubectl apply -k deployment-kustomize/overlays/EU-TEST'
-//                     }
-//                 }
-//             }
-//         }
+        stage('deploy to kubernetes') {
+            steps {
+                script {
+                    withKubeConfig(clusterName: 'proxmox', contextName: 'proxmox', credentialsId: 'k3s-eu-test', serverUrl: 'https://192.168.134.115:6443') {
+                        sh 'kubectl kustomize edit set image ghcr.io/valentinlutz/spring-native-reference-project:${VERSION}'
+                        sh 'kubectl apply -k deployment-kustomize/overlays/EU-TEST'
+                    }
+                }
+            }
+        }
     }
 }

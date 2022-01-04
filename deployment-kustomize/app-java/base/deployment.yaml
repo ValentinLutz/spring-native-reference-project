@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-native-reference-project
+spec:
+  template:
+    spec:
+      containers:
+        - name: spring-native-reference-project
+          image: ghcr.io/valentinlutz/spring-native-reference-project
+          imagePullPolicy: Always
