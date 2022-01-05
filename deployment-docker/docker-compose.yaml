@@ -1,7 +1,10 @@
 version: '3.9'
 
-services:
+networks:
+  default:
+    name: spring-native-reference-project
 
+services:
   postgresql:
     image: postgres:13.5
     container_name: postgresql

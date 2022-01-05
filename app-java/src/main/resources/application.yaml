@@ -2,6 +2,8 @@ spring:
   mvc:
     servlet:
       path: /api
+  datasource:
+    driver-class-name: org.postgresql.Driver
 
 springdoc:
   swagger-ui:

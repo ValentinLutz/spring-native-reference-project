@@ -1,0 +1,15 @@
+version: '3.9'
+
+networks:
+  default:
+    name: spring-native-reference-project
+
+services:
+  app:
+    image: app-java:1.0.0-SNAPSHOT
+    container_name: app
+    hostname: app
+    environment:
+      spring_profiles_active: NONE-CONTAINER
+    ports:
+      - '8080:8080'

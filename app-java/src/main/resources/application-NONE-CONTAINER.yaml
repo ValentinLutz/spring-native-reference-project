@@ -1,0 +1,14 @@
+logging:
+  level:
+    root: info
+    web: info
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgresql:5432/dev_db
+    username: test
+    password: test
+
+custom:
+  region: NONE
+  environment: CONTAINER
