@@ -5,9 +5,9 @@ logging:
 
 spring:
   datasource:
-    url: TODO
-    username: TODO
-    password: TODO
+    url: jdbc:postgresql://postgresql:5432/test_db
+    username: ${POSTGRESQL_USERNAME}
+    password: ${POSTGRESQL_PASSWORD}
 
 custom:
   region: EU

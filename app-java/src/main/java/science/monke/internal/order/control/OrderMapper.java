@@ -7,7 +7,9 @@ import science.monke.api.order.entity.OrderRequest;
 import science.monke.api.order.entity.OrderResponse;
 import science.monke.api.order.entity.OrderStatus;
 import science.monke.internal.order.entity.OrderEntity;
+import science.monke.internal.order.entity.OrderId;
 import science.monke.internal.order.entity.OrderItemEntity;
+import science.monke.spring.config.CustomProperties;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
@@ -16,14 +18,14 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMapper {
 
+  private final CustomProperties customProperties;
   private final OrderItemMapper orderItemMapper;
-  private final OrderIdGenerator orderIdGenerator;
 
   @Autowired
   public OrderMapper(
-      final OrderItemMapper orderItemMapper, final OrderIdGenerator orderIdGenerator) {
+      final CustomProperties customProperties, final OrderItemMapper orderItemMapper) {
+    this.customProperties = customProperties;
     this.orderItemMapper = orderItemMapper;
-    this.orderIdGenerator = orderIdGenerator;
   }
 
   public OrderEntity orderRequestToOrderEntity(final OrderRequest orderRequest) {
@@ -31,7 +33,9 @@ public class OrderMapper {
         OrderEntity.builder()
             .creationDate(OffsetDateTime.now())
             .orderStatus(OrderStatus.ORDER_PLACED.name())
-            .orderId(orderIdGenerator.generateOrderId())
+            .orderId(
+                OrderId.randomOrderId(
+                    customProperties.getRegion(), customProperties.getEnvironment()))
             .build();
 
     final Set<OrderItemEntity> orderItemEntities =

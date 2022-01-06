@@ -1,6 +1,7 @@
 package science.monke.internal.order.entity;
 
 import lombok.*;
+import science.monke.internal.order.control.OrderIdConverter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,8 +25,9 @@ public class OrderEntity implements Serializable {
   @Column(name = "creation_date", nullable = false)
   private OffsetDateTime creationDate;
 
+  @Convert(converter = OrderIdConverter.class)
   @Column(name = "order_id", nullable = false)
-  private String orderId;
+  private OrderId orderId;
 
   @Column(name = "order_status", nullable = false)
   private String orderStatus;

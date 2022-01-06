@@ -2,10 +2,10 @@ package science.monke.api.order.entity;
 
 import lombok.Builder;
 
-import java.util.Set;
+import java.util.List;
 
 public record OrderRequest(
-        Set<String> items
+        List<String> items
 ) {
     // Can be moved to class level if IntelliJ plugin works
     @Builder

@@ -1,13 +1,14 @@
 package science.monke.api.order.entity;
 
 import lombok.Builder;
+import science.monke.internal.order.entity.OrderId;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
 
 public record OrderResponse(
         OrderStatus status,
-        String orderId,
+        OrderId orderId,
         Set<OrderItemResponse> items,
         OffsetDateTime creationDate
 ) {
