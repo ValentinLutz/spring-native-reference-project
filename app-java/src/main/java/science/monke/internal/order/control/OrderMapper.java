@@ -57,7 +57,7 @@ public class OrderMapper {
 
     return OrderResponse.builder()
         .creationDate(orderEntity.getCreationDate())
-        .orderId(orderEntity.getOrderId())
+        .orderId(orderEntity.getOrderId().value())
         .items(orderItemResponses)
         .status(OrderStatus.valueOf(orderEntity.getOrderStatus()))
         .build();
