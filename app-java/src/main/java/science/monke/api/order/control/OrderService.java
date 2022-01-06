@@ -7,7 +7,7 @@ import science.monke.api.order.entity.OrderResponse;
 import science.monke.internal.order.control.OrderMapper;
 import science.monke.internal.order.entity.OrderEntity;
 import science.monke.internal.order.repository.OrderRepository;
-import science.monke.internal.workflow.DefaultWorkflow;
+import science.monke.internal.workflow.Workflow;
 import science.monke.internal.workflow.WorkflowObject;
 
 import java.util.Optional;
@@ -21,13 +21,13 @@ public class OrderService {
 
   private final OrderRepository orderRepository;
   private final OrderMapper orderMapper;
-  private final DefaultWorkflow defaultWorkflow;
+  private final Workflow defaultWorkflow;
 
   @Autowired
   public OrderService(
       final OrderRepository orderRepository,
       final OrderMapper orderMapper,
-      final DefaultWorkflow defaultWorkflow) {
+      final Workflow defaultWorkflow) {
     this.orderRepository = orderRepository;
     this.orderMapper = orderMapper;
     this.defaultWorkflow = defaultWorkflow;

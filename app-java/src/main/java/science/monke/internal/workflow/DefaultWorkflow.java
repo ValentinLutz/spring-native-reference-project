@@ -2,15 +2,15 @@ package science.monke.internal.workflow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import science.monke.internal.event.OrderEvent;
+import science.monke.internal.event.Event;
 
 @Component
 public class DefaultWorkflow implements Workflow {
 
-  private final OrderEvent orderEvent;
+  private final Event orderEvent;
 
   @Autowired
-  public DefaultWorkflow(final OrderEvent orderEvent) {
+  public DefaultWorkflow(final Event orderEvent) {
     this.orderEvent = orderEvent;
   }
 

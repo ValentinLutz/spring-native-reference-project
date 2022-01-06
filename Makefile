@@ -2,6 +2,7 @@ include .make/help.mk
 include .make/test.mk
 include .make/app.mk
 include .make/docker.mk
+include .make/database.mk
 
 PROJECT_NAME ?= spring-native-reference-project
 MAVEN_PROFILE ?= none-dev
@@ -31,15 +32,5 @@ package:: ## Build all maven modules | MAVEN_THREAD_ARGS, MAVEN_ARGS
 version:: ## Set version of all maven modules | VERSION, MAVEN_THREAD_ARGS, MAVEN_ARGS
 	./mvnw versions:set \
 		-DnewVersion=${VERSION} \
-		${MAVEN_THREAD_ARGS} \
-		${MAVEN_ARGS}
-
-migrate.db:: ## Migrate database | MAVEN_PROFILE, FLYWAY_USER, FLYWAY_PASSWORD, MAVEN_THREAD_ARGS, MAVEN_ARGS
-	./mvnw flyway:clean \
-		flyway:migrate \
-		-pl migration-database \
-		-P ${MAVEN_PROFILE} \
-		-Dflyway.user=${FLYWAY_USER} \
-		-Dflyway.password=${FLYWAY_PASSWORD} \
 		${MAVEN_THREAD_ARGS} \
 		${MAVEN_ARGS}

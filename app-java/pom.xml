@@ -172,6 +172,12 @@
                 <version>${spring-native.version}</version>
                 <executions>
                     <execution>
+                        <id>test-generate</id>
+                        <goals>
+                            <goal>test-generate</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>generate</id>
                         <goals>
                             <goal>generate</goal>
@@ -186,15 +192,18 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <profiles>
-                        <profile>${environment}</profile>
+                        <profile>${region}-${environment}</profile>
                     </profiles>
                     <image>
                         <builder>paketobuildpacks/builder:tiny</builder>
                         <env>
-                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                            <!--                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>-->
                             <!--                            <BP_BINARY_COMPRESSION_METHOD>upx</BP_BINARY_COMPRESSION_METHOD>-->
                         </env>
                     </image>
+                    <systemPropertyVariables>
+                        <springAot>true</springAot>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
