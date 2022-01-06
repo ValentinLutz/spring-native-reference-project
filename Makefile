@@ -3,6 +3,7 @@ include .make/test.mk
 include .make/app.mk
 include .make/docker.mk
 include .make/database.mk
+include .make/kubernetes.mk
 
 PROJECT_NAME ?= spring-native-reference-project
 MAVEN_PROFILE ?= none-dev

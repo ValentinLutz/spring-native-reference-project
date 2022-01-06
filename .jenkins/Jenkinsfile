@@ -10,10 +10,11 @@ pipeline {
 
     environment {
         VERSION = "${sh(script:'date +"%y.%m.%d.%H%M%S"', returnStdout: true).trim()}"
+        MAVEN_PROFILE = 'eu-test'
     }
 
     stages {
-        stage('version') {
+        stage('Make: Set Version') {
             steps {
                 script {
                     sh 'make version'
@@ -21,54 +22,67 @@ pipeline {
                 }
             }
         }
-        stage('clean') {
+        stage('Make: Compile') {
             steps {
                 script {
-                    sh 'make clean'
+                    sh 'make clean compile'
                 }
             }
         }
-        stage('compile') {
-            steps {
-                script {
-                    sh 'make compile'
-                }
-            }
-        }
-        stage('test') {
+        stage('Make: Unit Test') {
             steps {
                 script {
                     sh 'make test'
                 }
             }
         }
-        stage('build native image') {
+        stage('Make: Build Image') {
             steps {
                 script {
                     withDockerServer([uri: 'tcp://192.168.134.110:2375']) {
-                        sh 'make app-build-native'
+                        sh 'make app.build'
                     }
                 }
             }
         }
-        stage('publish native image') {
+        stage('Make: Push Image') {
             steps {
                 script {
                     withDockerServer([uri: 'tcp://192.168.134.110:2375']) {
                         withDockerRegistry(credentialsId: 'github-registry', url: 'https://ghcr.io') {
-                            sh 'make app-tag-native app-push-native'
+                            sh 'make app.tag app.push'
                         }
                     }
                 }
             }
         }
-        stage('deploy to kubernetes') {
+        stage('Make: Deploy to Kubernetes') {
             steps {
                 script {
                     withKubeConfig(clusterName: 'proxmox', contextName: 'proxmox', credentialsId: 'k3s-eu-test', serverUrl: 'https://192.168.134.115:6443') {
-                        sh 'kubectl kustomize edit set image ghcr.io/valentinlutz/spring-native-reference-project:${VERSION}'
-                        sh 'kubectl apply -k deployment-kustomize/overlays/EU-TEST'
+                        sh 'make kubernetes.version kubernetes.deploy'
                     }
+                }
+            }
+        }
+        stage('Make: Smoke Test') {
+            steps {
+                script {
+                    sh 'make test.smoke'
+                }
+            }
+        }
+        stage('Make: Integration Test') {
+            steps {
+                script {
+                    sh 'make test.integration'
+                }
+            }
+        }
+        stage('Make: Load Test') {
+            steps {
+                script {
+                    sh 'make test.load'
                 }
             }
         }
