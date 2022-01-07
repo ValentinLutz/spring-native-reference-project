@@ -37,7 +37,9 @@ pipeline {
             }
         }
         stage('Make: Build Image') {
-            when { false }
+            when {
+                branch 'nope'
+            }
             steps {
                 script {
                     withDockerServer([uri: 'tcp://192.168.134.110:2375']) {
