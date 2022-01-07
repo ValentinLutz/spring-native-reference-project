@@ -105,7 +105,7 @@
         <!-- SUREFIRE -->
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <!-- OPENAPI -->
-        <springdoc-openapi.version>1.6.2</springdoc-openapi.version>
+        <springdoc-openapi.version>1.6.3</springdoc-openapi.version>
         <swagger-maven-plugin.version>2.1.11</swagger-maven-plugin.version>
         <!-- LOMBOK -->
         <lombok.version>1.18.22</lombok.version>

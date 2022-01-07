@@ -15,13 +15,6 @@
     <packaging>jar</packaging>
 
     <properties>
-        <!-- OPENAPI -->
-        <swagger-maven-plugin.output-path>
-            ${project.basedir}/src/main/resources/META-INF/resources/swagger-ui
-        </swagger-maven-plugin.output-path>
-        <swagger-maven-plugin.config-base-path>
-            ${project.basedir}/src/main/openapi
-        </swagger-maven-plugin.config-base-path>
     </properties>
 
     <dependencies>
@@ -161,7 +154,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <parallel>classes</parallel>
+                    <parallel>classesAndMethods</parallel>
                     <skip>${skipUnitTests}</skip>
                 </configuration>
             </plugin>
