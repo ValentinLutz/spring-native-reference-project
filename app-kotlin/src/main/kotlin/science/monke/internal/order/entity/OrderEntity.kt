@@ -1,4 +1,4 @@
-package science.monke.internal.order.entity;
+package science.monke.internal.order.entity
 
 import science.monke.internal.order.control.OrderIdConverter
 import science.monke.internal.util.AbstractEntity

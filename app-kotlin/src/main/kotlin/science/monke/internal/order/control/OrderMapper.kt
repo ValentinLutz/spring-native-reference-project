@@ -1,4 +1,4 @@
-package science.monke.internal.order.control;
+package science.monke.internal.order.control
 
 import org.springframework.stereotype.Component
 import science.monke.api.order.entity.OrderItemResponse
@@ -26,7 +26,7 @@ class OrderMapper(val customProperties: CustomProperties, val orderItemMapper: O
         val orderItemEntities: Set<OrderItemEntity> =
             orderRequest.items.stream()
                 .map { itemName -> orderItemMapper.orderItemRequestToOrderItemEntity(itemName, orderEntity) }
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet())
 
         orderEntity.orderItems = orderItemEntities
         return orderEntity
@@ -36,7 +36,7 @@ class OrderMapper(val customProperties: CustomProperties, val orderItemMapper: O
         val orderItemResponses: Set<OrderItemResponse> =
             orderEntity.orderItems.stream()
                 .map(orderItemMapper::orderItemEntityToOrderItemResponse)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet())
 
         return OrderResponse(
             creationDate = orderEntity.creationDate,

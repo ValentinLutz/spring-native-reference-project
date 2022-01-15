@@ -1,4 +1,4 @@
-package science.monke.internal.event;
+package science.monke.internal.event
 
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -14,7 +14,7 @@ class OrderEvent(
 ) : Event {
 
     override fun getName(): EventName {
-        return EventName.ORDER_EVENT;
+        return EventName.ORDER_EVENT
     }
 
     @Transactional
@@ -23,6 +23,6 @@ class OrderEvent(
         orderRepository.save(order)
         orderItemRepository.saveAll(order.orderItems)
 
-        return workflowObject;
+        return workflowObject
     }
 }

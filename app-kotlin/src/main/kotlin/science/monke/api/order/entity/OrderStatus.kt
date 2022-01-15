@@ -1,4 +1,4 @@
-package science.monke.api.order.entity;
+package science.monke.api.order.entity
 
 enum class OrderStatus {
     ORDER_PLACED,

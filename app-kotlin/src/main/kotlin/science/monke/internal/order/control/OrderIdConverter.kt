@@ -1,9 +1,9 @@
-package science.monke.internal.order.control;
+package science.monke.internal.order.control
 
-import science.monke.internal.order.entity.OrderId;
+import science.monke.internal.order.entity.OrderId
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import javax.persistence.AttributeConverter
+import javax.persistence.Converter
 
 @Converter
 class OrderIdConverter : AttributeConverter<OrderId, String> {
@@ -14,6 +14,6 @@ class OrderIdConverter : AttributeConverter<OrderId, String> {
     }
 
     override fun convertToEntityAttribute(orderId: String): OrderId {
-        return OrderId(orderId);
+        return OrderId(orderId)
     }
 }

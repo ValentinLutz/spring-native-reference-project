@@ -1,4 +1,4 @@
-package science.monke.internal.event;
+package science.monke.internal.event
 
 enum class EventName {
     ORDER_EVENT,

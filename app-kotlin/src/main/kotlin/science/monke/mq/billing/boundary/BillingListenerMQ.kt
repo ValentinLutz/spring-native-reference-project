@@ -1,6 +1,6 @@
-package science.monke.mq.billing.boundary;
+package science.monke.mq.billing.boundary
 
-import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.annotation.JmsListener
 
 class BillingListenerMQ {
 

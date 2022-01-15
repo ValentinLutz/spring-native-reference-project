@@ -12,7 +12,7 @@
 
     <modules>
         <module>config</module>
-        <module>app-java</module>
+        <module>app-kotlin</module>
         <module>migration-database</module>
         <module>test-smoke</module>
         <module>test-integration</module>
