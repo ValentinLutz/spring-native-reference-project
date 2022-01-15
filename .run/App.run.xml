@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <module name="spring-native-reference-project.app-java" />
+    <module name="spring-native-reference-project.app-kotlin" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="science.monke.App" />
     <option name="ACTIVE_PROFILES" value="NONE-DEV" />
     <option name="ALTERNATIVE_JRE_PATH" />

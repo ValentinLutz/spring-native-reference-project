@@ -6,7 +6,7 @@ networks:
 
 services:
   app:
-    image: app-java:1.0.0-SNAPSHOT
+    image: app-kotlin:1.0.0-SNAPSHOT
     container_name: app
     hostname: app
     environment:
