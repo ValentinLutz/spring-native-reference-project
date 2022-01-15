@@ -101,7 +101,7 @@
         <spring-boot.version>2.6.2</spring-boot.version>
         <spring.version>5.3.14</spring.version>
         <spring-data.version>2021.1.0</spring-data.version>
-        <spring-native.version>0.11.0</spring-native.version>
+        <spring-native.version>0.11.1</spring-native.version>
         <spring-resdocs.version>2.0.5.RELEASE</spring-resdocs.version>
         <!-- SUREFIRE -->
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
