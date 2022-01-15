@@ -1,4 +1,4 @@
-package science.monke.internal.order.entity;
+package science.monke.internal.order.entity
 
 import science.monke.internal.util.AbstractEntity
 import java.time.OffsetDateTime
@@ -7,7 +7,6 @@ import javax.persistence.*
 @Entity
 @Table(name = "order_item", schema = "spring_native_reference_project")
 class OrderItemEntity(
-
     @Column(name = "creation_date")
     var creationDate: OffsetDateTime,
 

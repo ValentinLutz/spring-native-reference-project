@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException
 import science.monke.api.order.control.OrderService
 import science.monke.api.order.entity.OrderRequest
 import science.monke.api.order.entity.OrderResponse
-import java.util.*
+import science.monke.internal.order.entity.OrderId
 
 @Tag(name = "order")
 @RestController
@@ -46,9 +46,9 @@ class OrderController(val orderService: OrderService) {
         responseCode = "200",
         content = [Content(schema = Schema(implementation = OrderResponse::class))]
     )
-    fun getOrder(@PathVariable orderId: UUID): OrderResponse {
+    fun getOrder(@PathVariable orderId: String): OrderResponse {
         return orderService
-            .getOrder(orderId)
+            .getOrder(OrderId(orderId))
             .orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND) }
     }
 }

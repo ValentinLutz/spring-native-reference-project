@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service
 import science.monke.api.order.entity.OrderRequest
 import science.monke.api.order.entity.OrderResponse
 import science.monke.internal.order.control.OrderMapper
+import science.monke.internal.order.entity.OrderId
 import science.monke.internal.order.repository.OrderRepository
 import science.monke.internal.workflow.Workflow
 import science.monke.internal.workflow.WorkflowObject
@@ -31,7 +32,7 @@ class OrderService(
         return orderMapper.orderEntityToOrderResponse(orderEntity)
     }
 
-    fun getOrder(uuid: UUID): Optional<OrderResponse> {
+    fun getOrder(uuid: OrderId): Optional<OrderResponse> {
         return orderRepository.findByOrderId(uuid).map(orderMapper::orderEntityToOrderResponse)
     }
 }

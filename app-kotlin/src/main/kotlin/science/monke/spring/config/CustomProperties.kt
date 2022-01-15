@@ -1,8 +1,11 @@
 package science.monke.spring.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.context.annotation.Configuration
+import org.springframework.boot.context.properties.ConstructorBinding
 
-@Configuration
+@ConstructorBinding
 @ConfigurationProperties(prefix = "custom")
-class CustomProperties(val region: Region, val environment: Environment)
+data class CustomProperties(
+    val region: Region,
+    val environment: Environment
+)

@@ -10,7 +10,8 @@ class OrderItemMapper {
 
     fun orderItemEntityToOrderItemResponse(orderItemEntity: OrderItemEntity): OrderItemResponse {
         return OrderItemResponse(
-            name = orderItemEntity.itemName
+            name = orderItemEntity.itemName,
+            creationDate = orderItemEntity.creationDate
         )
     }
 

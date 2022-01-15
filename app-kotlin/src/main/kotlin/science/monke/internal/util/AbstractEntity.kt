@@ -8,11 +8,11 @@ import javax.persistence.Id
 import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
-abstract class AbstractEntity<T : Serializable> {
+abstract class AbstractEntity<T : Serializable> : Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: T? = null
+    val id: T? = null
 
     override fun equals(other: Any?): Boolean {
         other ?: return false
@@ -29,6 +29,4 @@ abstract class AbstractEntity<T : Serializable> {
     override fun hashCode(): Int {
         return id.hashCode()
     }
-
-    override fun toString() = "Entity of type ${this.javaClass.name} with id: $id"
 }

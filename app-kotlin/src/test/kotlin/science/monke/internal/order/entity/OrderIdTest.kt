@@ -10,7 +10,7 @@ import java.time.OffsetDateTime
 class OrderIdTest {
 
     @Test
-    fun generateOrderIdEven() {
+    fun `generate even order id with region eu and environment dev`() {
         // GIVEN
 
         // WHEN
@@ -20,7 +20,7 @@ class OrderIdTest {
     }
 
     @Test
-    fun generateOrderIdOdd() {
+    fun `generate odd order id with region eu and environment test`() {
         // GIVEN
 
         // WHEN
@@ -30,7 +30,7 @@ class OrderIdTest {
     }
 
     @Test
-    fun generateOrderIdEu() {
+    fun `Generate order id for region eu and environment container`() {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
@@ -41,7 +41,7 @@ class OrderIdTest {
     }
 
     @Test
-    fun generateOrderIdUs() {
+    fun `Generate order id for region us and environment e2e`() {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
@@ -52,7 +52,7 @@ class OrderIdTest {
     }
 
     @Test
-    fun generateOrderIdEuProd() {
+    fun `Generate order id for region eu and environment prod`() {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
