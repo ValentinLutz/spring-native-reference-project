@@ -6,20 +6,23 @@ import science.monke.api.order.entity.OrderRequest
 import science.monke.api.order.entity.OrderResponse
 import science.monke.api.order.entity.OrderStatus
 import science.monke.internal.order.entity.OrderEntity
-import science.monke.internal.order.entity.OrderId
 import science.monke.internal.order.entity.OrderItemEntity
 import science.monke.spring.config.CustomProperties
 import java.time.OffsetDateTime
 import java.util.stream.Collectors
 
 @Component
-class OrderMapper(val customProperties: CustomProperties, val orderItemMapper: OrderItemMapper) {
+class OrderMapper(
+    val customProperties: CustomProperties,
+    val orderItemMapper: OrderItemMapper,
+    val orderIdGenerator: OrderIdGenerator
+) {
 
     fun orderRequestToOrderEntity(orderRequest: OrderRequest): OrderEntity {
         val orderEntity = OrderEntity(
             creationDate = OffsetDateTime.now(),
             orderStatus = OrderStatus.ORDER_PLACED.name,
-            orderId = OrderId.randomOrderId(customProperties.region, customProperties.environment),
+            orderId = orderIdGenerator.random(customProperties.region, customProperties.environment),
             orderItems = setOf()
         )
 
@@ -40,7 +43,7 @@ class OrderMapper(val customProperties: CustomProperties, val orderItemMapper: O
 
         return OrderResponse(
             creationDate = orderEntity.creationDate,
-            orderId = orderEntity.orderId.value,
+            orderId = orderEntity.orderId,
             items = orderItemResponses,
             status = OrderStatus.valueOf(orderEntity.orderStatus)
         )
