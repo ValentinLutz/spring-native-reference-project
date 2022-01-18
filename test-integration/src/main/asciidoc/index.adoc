@@ -1,5 +1,0 @@
-operation::getOrder[]
-
-operation::postOrder[]
-
-operation::getOrders[]
