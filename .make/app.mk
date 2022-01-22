@@ -24,7 +24,7 @@ app.run:: ## Run app | MAVEN_PROFILE, MAVEN_ARGS
 		-P ${MAVEN_PROFILE} \
 		${MAVEN_ARGS}
 
-app.tart:: ## Start app in background | MAVEN_PROFILE, MAVEN_ARGS
+app.start:: ## Start app in background | MAVEN_PROFILE, MAVEN_ARGS
 	./mvnw spring-boot:start \
 		-pl app-kotlin \
 		-P ${MAVEN_PROFILE} \
