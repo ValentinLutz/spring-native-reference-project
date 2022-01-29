@@ -27,7 +27,7 @@ class BasicSimulation : Simulation() {
     init {
         setUp(
             scn.injectOpen(
-                rampUsersPerSec(0.0).to(100.0).during(60)
+                rampUsersPerSec(0.0).to(500.0).during(60)
             ).protocols(httpProtocol)
         )
     }

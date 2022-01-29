@@ -1,7 +1,0 @@
-base-uri: http://localhost:8080
-base-path: /api
-
-# Smoke test config
-
-
-# Integration test config
