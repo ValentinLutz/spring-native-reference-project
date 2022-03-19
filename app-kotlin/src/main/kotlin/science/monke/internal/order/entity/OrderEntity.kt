@@ -1,21 +1,22 @@
 package science.monke.internal.order.entity
 
+import org.springframework.data.annotation.Transient
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
 import science.monke.internal.util.AbstractEntity
 import java.time.OffsetDateTime
-import javax.persistence.*
 
-@Entity
-@Table(name = "\"order\"", schema = "spring_native_reference_project")
+@Table("spring_native_reference_project.\"order\"")
 class OrderEntity(
-    @Column(name = "creation_date")
+    @Column("creation_date")
     var creationDate: OffsetDateTime,
 
-    @Column(name = "order_id")
+    @Column("order_id")
     var orderId: String,
 
-    @Column(name = "order_status")
+    @Column("order_status")
     var orderStatus: String,
-
-    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var orderItems: Set<OrderItemEntity>
-) : AbstractEntity<Int>()
+) : AbstractEntity<Int>() {
+    @Transient
+    var orderItems: Set<OrderItemEntity> = HashSet()
+}

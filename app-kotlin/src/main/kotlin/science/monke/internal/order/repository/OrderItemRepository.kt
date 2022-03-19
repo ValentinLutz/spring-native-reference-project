@@ -1,6 +1,10 @@
 package science.monke.internal.order.repository
 
-import org.springframework.data.repository.CrudRepository
+import kotlinx.coroutines.flow.Flow
+import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 import science.monke.internal.order.entity.OrderItemEntity
 
-interface OrderItemRepository : CrudRepository<OrderItemEntity, Int>
+interface OrderItemRepository : CoroutineCrudRepository<OrderItemEntity, Int> {
+
+    fun findByOrderId(orderId: String): Flow<OrderItemEntity>
+}

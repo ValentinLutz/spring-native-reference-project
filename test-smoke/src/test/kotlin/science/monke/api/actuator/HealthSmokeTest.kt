@@ -24,7 +24,7 @@ class HealthSmokeTest : AbstractSmokeTest() {
         Given {
             with()
         } When {
-            get("/actuator/health/db")
+            get("/actuator/health/r2dbc")
         } Then {
             statusCode(200)
         }

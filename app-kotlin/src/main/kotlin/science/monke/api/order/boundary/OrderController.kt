@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
+import kotlinx.coroutines.flow.Flow
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import science.monke.api.order.entity.OrderRequest
@@ -21,7 +22,7 @@ class OrderController(val orderService: OrderService) {
         responseCode = "200",
         content = [Content(array = ArraySchema(schema = Schema(implementation = OrderResponse::class)))]
     )
-    fun getOrders(): Set<OrderResponse> {
+    fun getOrders(): Flow<OrderResponse> {
         return orderService.getOrders()
     }
 
@@ -31,7 +32,7 @@ class OrderController(val orderService: OrderService) {
         responseCode = "201",
         content = [Content(schema = Schema(implementation = OrderResponse::class))]
     )
-    fun postOrder(@RequestBody orderRequest: OrderRequest): OrderResponse {
+    suspend fun postOrder(@RequestBody orderRequest: OrderRequest): OrderResponse {
         return orderService.postOrders(orderRequest)
     }
 
@@ -40,7 +41,7 @@ class OrderController(val orderService: OrderService) {
         responseCode = "200",
         content = [Content(schema = Schema(implementation = OrderResponse::class))]
     )
-    fun getOrder(@PathVariable orderId: String): OrderResponse {
+    suspend fun getOrder(@PathVariable orderId: String): OrderResponse {
         return orderService.getOrder(orderId)
     }
 }

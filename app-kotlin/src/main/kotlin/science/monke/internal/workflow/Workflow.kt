@@ -2,7 +2,7 @@ package science.monke.internal.workflow
 
 interface Workflow {
 
-    fun getName(): WorkflowName
-    
-    fun execute(workflowObject: WorkflowObject): WorkflowObject
+    suspend fun getName(): WorkflowName
+
+    suspend fun execute(workflowObject: WorkflowObject): WorkflowObject
 }

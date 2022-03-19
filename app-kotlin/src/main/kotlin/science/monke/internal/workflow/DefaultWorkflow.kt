@@ -6,11 +6,11 @@ import science.monke.internal.event.Event
 @Component
 class DefaultWorkflow(val orderEvent: Event) : Workflow {
 
-    override fun getName(): WorkflowName {
+    override suspend fun getName(): WorkflowName {
         return WorkflowName.DEFAULT_WORKFLOW
     }
 
-    override fun execute(workflowObject: WorkflowObject): WorkflowObject {
+    override suspend fun execute(workflowObject: WorkflowObject): WorkflowObject {
         return orderEvent.execute(workflowObject)
     }
 }

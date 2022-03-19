@@ -19,7 +19,7 @@ class OrderItemMapper {
         return OrderItemEntity(
             itemName = name,
             creationDate = orderEntity.creationDate,
-            order = orderEntity
+            orderId = orderEntity.orderId
         )
     }
 }

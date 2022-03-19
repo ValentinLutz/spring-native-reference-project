@@ -22,8 +22,7 @@ class OrderMapper(
         val orderEntity = OrderEntity(
             creationDate = OffsetDateTime.now(),
             orderStatus = OrderStatus.ORDER_PLACED.name,
-            orderId = orderIdGenerator.random(customProperties.region, customProperties.environment),
-            orderItems = setOf()
+            orderId = orderIdGenerator.random(customProperties.region, customProperties.environment)
         )
 
         val orderItemEntities: Set<OrderItemEntity> =
