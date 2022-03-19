@@ -4,8 +4,8 @@ logging:
     web: info
 
 spring:
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/dev_db
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dev_db
     username: test
     password: test
 

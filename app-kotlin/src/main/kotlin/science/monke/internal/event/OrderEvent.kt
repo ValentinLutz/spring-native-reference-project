@@ -1,6 +1,5 @@
 package science.monke.internal.event
 
-import kotlinx.coroutines.flow.collect
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import science.monke.internal.order.entity.OrderEntity
@@ -14,16 +13,15 @@ class OrderEvent(
     val orderItemRepository: OrderItemRepository
 ) : Event {
 
-    override suspend fun getName(): EventName {
+    override fun getName(): EventName {
         return EventName.ORDER_EVENT
     }
 
     @Transactional
-    override suspend fun execute(workflowObject: WorkflowObject): WorkflowObject {
+    override fun execute(workflowObject: WorkflowObject): WorkflowObject {
         val order: OrderEntity = workflowObject.order
-
         orderRepository.save(order)
-        orderItemRepository.saveAll(order.orderItems).collect()
+        orderItemRepository.saveAll(order.orderItems)
 
         return workflowObject
     }

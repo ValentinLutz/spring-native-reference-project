@@ -1,6 +1,7 @@
 spring:
-  webflux:
-    base-path: /api
+  mvc:
+    servlet:
+      path: /api
   datasource:
     driver-class-name: org.postgresql.Driver
 
@@ -18,7 +19,3 @@ server:
   error:
     whitelabel:
       enabled: false
-  tomcat:
-    threads:
-      max: 400
-
