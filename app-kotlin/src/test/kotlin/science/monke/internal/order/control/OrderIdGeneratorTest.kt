@@ -1,7 +1,6 @@
 package science.monke.internal.order.control
 
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import science.monke.spring.config.Environment
 import science.monke.spring.config.Region
@@ -61,7 +60,6 @@ internal class OrderIdGeneratorTest {
     }
 
     @Test
-    @Disabled
     fun `Generate test order ids for region none and environment dev`() {
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         val salts = setOf("1", "101", "10101", "1010101")
@@ -69,7 +67,6 @@ internal class OrderIdGeneratorTest {
     }
 
     @Test
-    @Disabled
     fun `Generate test order ids for region eu and environment test`() {
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         val salts = setOf("1", "101", "10101", "1010101")

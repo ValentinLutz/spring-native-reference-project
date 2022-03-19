@@ -10,10 +10,10 @@ class OrderItemEntity(
     @Column(name = "creation_date")
     var creationDate: OffsetDateTime,
 
+    @Column(name = "item_name")
+    var itemName: String,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", referencedColumnName = "order_id")
-    var order: OrderEntity,
-
-    @Column(name = "item_name")
-    var itemName: String
+    var order: OrderEntity
 ) : AbstractEntity<Int>()

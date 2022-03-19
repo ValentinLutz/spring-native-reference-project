@@ -1,4 +1,4 @@
-package science.monke.api.order.control
+package science.monke.internal.order.boundary
 
 import org.springframework.stereotype.Service
 import science.monke.api.order.entity.OrderRequest
@@ -7,7 +7,8 @@ import science.monke.internal.order.control.OrderMapper
 import science.monke.internal.order.repository.OrderRepository
 import science.monke.internal.workflow.Workflow
 import science.monke.internal.workflow.WorkflowObject
-import java.util.*
+import science.monke.util.Error
+import science.monke.util.exception.NotFoundException
 import java.util.stream.Collectors
 import java.util.stream.StreamSupport
 
@@ -22,6 +23,7 @@ class OrderService(
         return StreamSupport.stream(orderRepository.findAll().spliterator(), false)
             .map(orderMapper::orderEntityToOrderResponse)
             .collect(Collectors.toSet())
+            .ifEmpty { throw NotFoundException(Error.ORDER_NOT_FOUND) }
     }
 
     fun postOrders(orderRequest: OrderRequest): OrderResponse {
@@ -31,7 +33,9 @@ class OrderService(
         return orderMapper.orderEntityToOrderResponse(orderEntity)
     }
 
-    fun getOrder(orderId: String): Optional<OrderResponse> {
-        return orderRepository.findByOrderId(orderId).map(orderMapper::orderEntityToOrderResponse)
+    fun getOrder(orderId: String): OrderResponse {
+        return orderRepository.findByOrderId(orderId)
+            .map(orderMapper::orderEntityToOrderResponse)
+            .orElseThrow { NotFoundException(Error.ORDER_NOT_FOUND) }
     }
 }

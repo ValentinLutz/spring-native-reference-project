@@ -7,10 +7,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
-import science.monke.api.order.control.OrderService
 import science.monke.api.order.entity.OrderRequest
 import science.monke.api.order.entity.OrderResponse
+import science.monke.internal.order.boundary.OrderService
 
 @Tag(name = "order")
 @RestController
@@ -23,11 +22,7 @@ class OrderController(val orderService: OrderService) {
         content = [Content(array = ArraySchema(schema = Schema(implementation = OrderResponse::class)))]
     )
     fun getOrders(): Set<OrderResponse> {
-        val orders: Set<OrderResponse> = orderService.getOrders()
-        if (orders.isEmpty()) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND)
-        }
-        return orders
+        return orderService.getOrders()
     }
 
     @PostMapping
@@ -46,8 +41,6 @@ class OrderController(val orderService: OrderService) {
         content = [Content(schema = Schema(implementation = OrderResponse::class))]
     )
     fun getOrder(@PathVariable orderId: String): OrderResponse {
-        return orderService
-            .getOrder(orderId)
-            .orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND) }
+        return orderService.getOrder(orderId)
     }
 }
