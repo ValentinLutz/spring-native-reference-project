@@ -1,17 +1,20 @@
 package science.monke.spring.error
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
+import org.springframework.web.bind.annotation.RestControllerAdvice
 import science.monke.util.exception.HttpErrorException
 import javax.servlet.http.HttpServletRequest
 
-@ControllerAdvice
-class ApiResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
+@RestControllerAdvice
+class ApiResponseEntityExceptionHandler {
+
+    val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @ExceptionHandler(HttpErrorException::class)
     fun handleCustomRuntimeException(
@@ -24,7 +27,7 @@ class ApiResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
             error = httpErrorException.error,
             message = httpErrorException.message
         )
-        logger.info(errorResponse.message, httpErrorException)
+        logger.warn(errorResponse.message, httpErrorException)
         return ResponseEntity<ErrorResponse>(errorResponse, errorResponse.status)
     }
 

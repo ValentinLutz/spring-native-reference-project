@@ -9,8 +9,7 @@ import science.monke.internal.workflow.Workflow
 import science.monke.internal.workflow.WorkflowObject
 import science.monke.util.Error
 import science.monke.util.exception.NotFoundException
-import java.util.stream.Collectors
-import java.util.stream.StreamSupport
+import javax.transaction.Transactional
 
 @Service
 class OrderService(
@@ -19,11 +18,11 @@ class OrderService(
     val defaultWorkflow: Workflow
 ) {
 
+    @Transactional
     fun getOrders(): Set<OrderResponse> {
-        return StreamSupport.stream(orderRepository.findAll().spliterator(), false)
+        return orderRepository.findAll()
             .map(orderMapper::orderEntityToOrderResponse)
-            .collect(Collectors.toSet())
-            .ifEmpty { throw NotFoundException(Error.ORDER_NOT_FOUND) }
+            .toSet()
     }
 
     fun postOrders(orderRequest: OrderRequest): OrderResponse {
@@ -33,9 +32,10 @@ class OrderService(
         return orderMapper.orderEntityToOrderResponse(orderEntity)
     }
 
+    @Transactional
     fun getOrder(orderId: String): OrderResponse {
         return orderRepository.findByOrderId(orderId)
-            .map(orderMapper::orderEntityToOrderResponse)
-            .orElseThrow { NotFoundException(Error.ORDER_NOT_FOUND) }
+            ?.let(orderMapper::orderEntityToOrderResponse)
+            ?: throw NotFoundException(Error.ORDER_NOT_FOUND)
     }
 }
