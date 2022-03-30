@@ -1,4 +1,4 @@
-package science.monke.util
+package science.monke.spring.error
 
 enum class Error(val id: Int, val message: String) {
 

@@ -7,7 +7,6 @@ import science.monke.internal.order.entity.OrderItemEntity
 
 @Component
 class OrderItemMapper {
-
     fun orderItemEntityToOrderItemResponse(orderItemEntity: OrderItemEntity): OrderItemResponse {
         return OrderItemResponse(
             name = orderItemEntity.itemName,
@@ -18,7 +17,6 @@ class OrderItemMapper {
     fun orderItemRequestToOrderItemEntity(name: String, orderEntity: OrderEntity): OrderItemEntity {
         return OrderItemEntity(
             itemName = name,
-            creationDate = orderEntity.creationDate,
             order = orderEntity
         )
     }

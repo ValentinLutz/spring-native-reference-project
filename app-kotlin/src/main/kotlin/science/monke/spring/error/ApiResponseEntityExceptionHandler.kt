@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
-import science.monke.util.exception.HttpErrorException
+import science.monke.spring.exception.HttpErrorException
 import javax.servlet.http.HttpServletRequest
 
 @RestControllerAdvice

@@ -1,7 +1,7 @@
-package science.monke.util.exception
+package science.monke.spring.exception
 
 import org.springframework.http.HttpStatus
-import science.monke.util.Error
+import science.monke.spring.error.Error
 
 class NotFoundException : HttpErrorException {
 

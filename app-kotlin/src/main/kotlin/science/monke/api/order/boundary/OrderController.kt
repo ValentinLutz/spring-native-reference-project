@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*
 import science.monke.api.order.entity.OrderRequest
 import science.monke.api.order.entity.OrderResponse
 import science.monke.internal.order.boundary.OrderService
+import science.monke.internal.order.entity.OrderId
 
 @Tag(name = "order")
 @RestController
 @RequestMapping("/orders")
 class OrderController(val orderService: OrderService) {
-
     @GetMapping
     @ApiResponse(
         responseCode = "200",
@@ -40,7 +40,7 @@ class OrderController(val orderService: OrderService) {
         responseCode = "200",
         content = [Content(schema = Schema(implementation = OrderResponse::class))]
     )
-    fun getOrder(@PathVariable orderId: String): OrderResponse {
+    fun getOrder(@PathVariable orderId: OrderId): OrderResponse {
         return orderService.getOrder(orderId)
     }
 }

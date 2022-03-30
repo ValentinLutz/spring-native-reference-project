@@ -1,6 +1,7 @@
 package science.monke.internal.order.control
 
 import org.springframework.stereotype.Component
+import science.monke.internal.order.entity.OrderId
 import science.monke.spring.config.Environment
 import science.monke.spring.config.Region
 import java.nio.ByteBuffer
@@ -11,17 +12,11 @@ import java.util.*
 
 @Component
 class OrderIdGenerator {
-
-    fun random(region: Region, environment: Environment): String {
+    fun random(region: Region, environment: Environment): OrderId {
         return of(region, environment, OffsetDateTime.now(), randomSalt())
     }
 
-    fun of(
-        region: Region,
-        environment: Environment,
-        offsetDateTime: OffsetDateTime,
-        salt: String
-    ): String {
+    fun of(region: Region, environment: Environment, offsetDateTime: OffsetDateTime, salt: String): OrderId {
         val bytes: ByteArray =
             (region.name + environment.name + offsetDateTime + salt).toByteArray(StandardCharsets.UTF_8)
         val uuid: UUID = UUID.nameUUIDFromBytes(bytes)
@@ -32,9 +27,11 @@ class OrderIdGenerator {
             identifier = "-$region-"
         }
 
-        val bas64UUIDlength: Int = bas64UUID.length / 2
+        val bas64UUIDLength: Int = bas64UUID.length / 2
 
-        return bas64UUID.substring(0, bas64UUIDlength) + identifier + bas64UUID.substring(bas64UUIDlength)
+        val orderId: String =
+            bas64UUID.substring(0, bas64UUIDLength) + identifier + bas64UUID.substring(bas64UUIDLength)
+        return OrderId(orderId)
     }
 
     private fun randomSalt(): String {

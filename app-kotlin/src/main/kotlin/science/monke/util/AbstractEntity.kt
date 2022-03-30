@@ -1,4 +1,4 @@
-package science.monke.internal.util
+package science.monke.util
 
 import org.springframework.data.util.ProxyUtils
 import java.io.Serializable

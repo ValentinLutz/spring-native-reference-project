@@ -1,4 +1,4 @@
-package science.monke.internal.workflow
+package science.monke.util.workflow
 
 enum class WorkflowName {
     DEFAULT_WORKFLOW,
