@@ -1,4 +1,4 @@
-package science.monke.spring.config
+package science.monke.spring.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding

@@ -1,4 +1,4 @@
-package science.monke.api.order.boundary
+package science.monke.api.order
 
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
@@ -9,8 +9,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import science.monke.api.order.entity.OrderRequest
 import science.monke.api.order.entity.OrderResponse
-import science.monke.internal.order.boundary.OrderService
-import science.monke.internal.order.entity.OrderId
+import science.monke.internal.order.OrderService
 
 @Tag(name = "order")
 @RestController
@@ -40,7 +39,7 @@ class OrderController(val orderService: OrderService) {
         responseCode = "200",
         content = [Content(schema = Schema(implementation = OrderResponse::class))]
     )
-    fun getOrder(@PathVariable orderId: OrderId): OrderResponse {
+    fun getOrder(@PathVariable orderId: String): OrderResponse {
         return orderService.getOrder(orderId)
     }
 }

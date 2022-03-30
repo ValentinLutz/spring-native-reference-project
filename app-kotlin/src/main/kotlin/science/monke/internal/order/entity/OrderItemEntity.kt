@@ -1,19 +1,21 @@
 package science.monke.internal.order.entity
 
-import science.monke.util.AbstractEntity
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
 import java.time.OffsetDateTime
-import javax.persistence.*
 
-@Entity
-@Table(name = "order_item")
+@Table("order_item")
 class OrderItemEntity(
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
-    var order: OrderEntity,
+    @Id
+    var id: Int? = null,
 
-    @Column(name = "creation_date")
+    @Column("order_id")
+    val orderId: String? = null,
+
+    @Column("creation_date")
     val creationDate: OffsetDateTime = OffsetDateTime.now(),
 
-    @Column(name = "item_name")
-    var itemName: String
-) : AbstractEntity<Int>()
+    @Column("item_name")
+    val itemName: String
+)

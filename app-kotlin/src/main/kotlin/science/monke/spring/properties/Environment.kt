@@ -1,4 +1,4 @@
-package science.monke.spring.config
+package science.monke.spring.properties
 
 enum class Environment {
     DEV,

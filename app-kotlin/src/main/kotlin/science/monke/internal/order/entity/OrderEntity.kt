@@ -1,21 +1,22 @@
 package science.monke.internal.order.entity
 
-import science.monke.util.AbstractEntity
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.MappedCollection
+import org.springframework.data.relational.core.mapping.Table
 import java.time.OffsetDateTime
-import javax.persistence.*
 
-@Entity
-@Table(name = "\"order\"")
+@Table("order")
 class OrderEntity(
-    @Column(name = "order_id")
-    var orderId: OrderId,
+    @Id
+    var id: String? = null,
 
-    @Column(name = "creation_date")
-    var creationDate: OffsetDateTime,
+    @Column("creation_date")
+    val creationDate: OffsetDateTime = OffsetDateTime.now(),
 
-    @Column(name = "order_status")
-    var orderStatus: String,
+    @Column("order_status")
+    var orderStatus: OrderStatus,
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    var orderItems: Set<OrderItemEntity>,
-) : AbstractEntity<Int>()
+    @MappedCollection(idColumn = "order_id", keyColumn = "order_id")
+    var orderItems: Set<OrderItemEntity>
+)

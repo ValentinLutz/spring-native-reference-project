@@ -5,6 +5,6 @@ CREATE TABLE spring_native_reference_project.task_log
     creation_date TIMESTAMPTZ NOT NULL,
     task          VARCHAR     NOT NULL,
     data          VARCHAR,
-    CONSTRAINT order_id FOREIGN KEY (order_id) REFERENCES "order" (order_id),
+    CONSTRAINT order_id FOREIGN KEY (order_id) REFERENCES "order" (id),
     PRIMARY KEY (id)
 );

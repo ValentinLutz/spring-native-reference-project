@@ -2,9 +2,8 @@ package science.monke.internal.order.control
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import science.monke.internal.order.entity.OrderId
-import science.monke.spring.config.Environment
-import science.monke.spring.config.Region
+import science.monke.spring.properties.Environment
+import science.monke.spring.properties.Region
 import java.time.OffsetDateTime
 
 internal class OrderIdGeneratorTest {
@@ -15,9 +14,9 @@ internal class OrderIdGeneratorTest {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
-        val orderId: OrderId = orderIdGenerator.of(Region.NONE, Environment.DEV, offsetDateTime, "1")
+        val orderId: String = orderIdGenerator.of(Region.NONE, Environment.DEV, offsetDateTime, "1")
         // THEN
-        Assertions.assertEquals("Y2FvghhpMxG-NONE-DEV-qzefk8Ziv0A", orderId.toString())
+        Assertions.assertEquals("Y2FvghhpMxG-NONE-DEV-qzefk8Ziv0A", orderId)
     }
 
     @Test
@@ -25,9 +24,9 @@ internal class OrderIdGeneratorTest {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
-        val orderId: OrderId = orderIdGenerator.of(Region.EU, Environment.TEST, offsetDateTime, "101")
+        val orderId: String = orderIdGenerator.of(Region.EU, Environment.TEST, offsetDateTime, "101")
         // THEN
-        Assertions.assertEquals("vMEFd4wLNhq-EU-TEST-RXrbUU60ZMw", orderId.toString())
+        Assertions.assertEquals("vMEFd4wLNhq-EU-TEST-RXrbUU60ZMw", orderId)
     }
 
     @Test
@@ -35,9 +34,9 @@ internal class OrderIdGeneratorTest {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
-        val orderId: OrderId = orderIdGenerator.of(Region.EU, Environment.CONTAINER, offsetDateTime, "1")
+        val orderId: String = orderIdGenerator.of(Region.EU, Environment.CONTAINER, offsetDateTime, "1")
         // THEN
-        Assertions.assertEquals("lzYTQAmOP1m-EU-CONTAINER-nEkgfU1xzbg", orderId.toString())
+        Assertions.assertEquals("lzYTQAmOP1m-EU-CONTAINER-nEkgfU1xzbg", orderId)
     }
 
     @Test
@@ -45,9 +44,9 @@ internal class OrderIdGeneratorTest {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
-        val orderId: OrderId = orderIdGenerator.of(Region.US, Environment.E2E, offsetDateTime, "101")
+        val orderId: String = orderIdGenerator.of(Region.US, Environment.E2E, offsetDateTime, "101")
         // THEN
-        Assertions.assertEquals("Fytr3CXdPUe-US-E2E-CGzYlcqUH4g", orderId.toString())
+        Assertions.assertEquals("Fytr3CXdPUe-US-E2E-CGzYlcqUH4g", orderId)
     }
 
     @Test
@@ -55,9 +54,9 @@ internal class OrderIdGeneratorTest {
         // GIVEN
         val offsetDateTime: OffsetDateTime = OffsetDateTime.parse("1980-01-01T00:00:00+00:00")
         // WHEN
-        val orderId: OrderId = orderIdGenerator.of(Region.EU, Environment.PROD, offsetDateTime, "10101")
+        val orderId: String = orderIdGenerator.of(Region.EU, Environment.PROD, offsetDateTime, "10101")
         // THEN
-        Assertions.assertEquals("mtQYw0tBMna-EU-p8zaGDvZEGw", orderId.toString())
+        Assertions.assertEquals("mtQYw0tBMna-EU-p8zaGDvZEGw", orderId)
     }
 
     @Test

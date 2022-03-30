@@ -1,4 +1,4 @@
-package science.monke.mq.billing.boundary
+package science.monke.mq.billing
 
 import org.springframework.jms.annotation.JmsListener
 

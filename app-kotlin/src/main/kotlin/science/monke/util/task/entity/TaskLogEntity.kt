@@ -1,25 +1,25 @@
 package science.monke.util.task.entity
 
-import science.monke.internal.order.entity.OrderId
-import science.monke.util.AbstractEntity
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
 import science.monke.util.task.TaskName
 import java.time.OffsetDateTime
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
 
-@Entity
-@Table(name = "task_log")
+@Table("task_log")
 class TaskLogEntity(
-    @Column(name = "order_id")
-    val orderId: OrderId,
+    @Id
+    var id: Int? = null,
 
-    @Column(name = "creation_date")
+    @Column("order_id")
+    var orderId: String,
+
+    @Column("creation_date")
     val creationDate: OffsetDateTime = OffsetDateTime.now(),
 
-    @Column(name = "task")
+    @Column("task")
     val taskName: TaskName,
 
-    @Column(name = "data")
+    @Column("data")
     var data: String
-) : AbstractEntity<Int>()
+)
