@@ -14,7 +14,9 @@ import science.monke.internal.order.OrderService
 @Tag(name = "order")
 @RestController
 @RequestMapping("/orders")
-class OrderController(val orderService: OrderService) {
+class OrderController(
+    private val orderService: OrderService
+) {
     @GetMapping
     @ApiResponse(
         responseCode = "200",

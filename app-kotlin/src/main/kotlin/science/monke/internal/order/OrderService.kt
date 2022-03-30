@@ -13,9 +13,9 @@ import science.monke.util.workflow.DefaultWorkflow
 
 @Service
 class OrderService(
-    val orderRepository: OrderRepository,
-    val orderMapper: OrderMapper,
-    val defaultWorkflow: DefaultWorkflow
+    private val orderRepository: OrderRepository,
+    private val orderMapper: OrderMapper,
+    private val defaultWorkflow: DefaultWorkflow
 ) {
     fun getOrders(): Set<OrderResponse> {
         return orderRepository.findAll()
@@ -25,6 +25,7 @@ class OrderService(
 
     fun postOrders(orderRequest: OrderRequest): OrderResponse {
         val orderEntity = orderMapper.orderRequestToOrderEntity(orderRequest)
+        orderRepository.save(orderEntity)
         val context = Context(orderEntity)
         defaultWorkflow.execute(context)
         return orderMapper.orderEntityToOrderResponse(orderEntity)

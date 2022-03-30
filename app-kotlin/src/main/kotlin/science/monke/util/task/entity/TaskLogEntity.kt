@@ -12,14 +12,14 @@ class TaskLogEntity(
     var id: Int? = null,
 
     @Column("order_id")
-    var orderId: String,
-
-    @Column("creation_date")
-    val creationDate: OffsetDateTime = OffsetDateTime.now(),
+    val orderId: String,
 
     @Column("task")
     val taskName: TaskName,
 
+    @Column("creation_date")
+    val creationDate: OffsetDateTime = OffsetDateTime.now(),
+
     @Column("data")
-    var data: String
+    val data: String? = null
 )

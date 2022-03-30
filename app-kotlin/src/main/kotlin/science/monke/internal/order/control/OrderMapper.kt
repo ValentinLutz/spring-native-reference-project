@@ -7,12 +7,13 @@ import science.monke.api.order.entity.OrderResponse
 import science.monke.internal.order.entity.OrderEntity
 import science.monke.internal.order.entity.OrderItemEntity
 import science.monke.internal.order.entity.OrderStatus
+import science.monke.util.workflow.WorkflowName
 import java.time.OffsetDateTime
 import java.util.stream.Collectors
 
 @Component
 class OrderMapper(
-    val orderItemMapper: OrderItemMapper
+    private val orderItemMapper: OrderItemMapper
 ) {
     fun orderRequestToOrderEntity(orderRequest: OrderRequest): OrderEntity {
         val orderItemEntities: Set<OrderItemEntity> =
@@ -23,7 +24,8 @@ class OrderMapper(
         return OrderEntity(
             creationDate = OffsetDateTime.now(),
             orderStatus = OrderStatus.ORDER_PLACED,
-            orderItems = orderItemEntities
+            orderItems = orderItemEntities,
+            workflow = WorkflowName.DEFAULT_WORKFLOW
         )
     }
 
