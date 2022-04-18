@@ -10,7 +10,7 @@ import science.monke.util.task.converter.StringToTaskNameConverter
 import science.monke.util.task.converter.TaskNameToStringConverter
 
 @Configuration
-class CustomJdbcConfiguration : AbstractJdbcConfiguration() {
+class CustomJdbcConfig : AbstractJdbcConfiguration() {
 
     override fun userConverters(): MutableList<*> {
         return mutableListOf(

@@ -108,6 +108,8 @@
         <!-- GATLING -->
         <gatling.version>3.7.3</gatling.version>
         <gatling-maven-plugin.version>4.0.1</gatling-maven-plugin.version>
+        <!-- AWS -->
+        <aws.sdk.version>2.17.160</aws.sdk.version>
 
         <!-- Test execution config, will be overwritten by test profiles -->
         <skipUnitTests>false</skipUnitTests>
@@ -156,6 +158,14 @@
                 <version>${jackson.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

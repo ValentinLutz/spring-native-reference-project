@@ -1,12 +1,11 @@
 package science.monke
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
-import science.monke.spring.properties.CustomProperties
 
 @SpringBootApplication
-@EnableConfigurationProperties(CustomProperties::class)
+@ConfigurationPropertiesScan
 class App
 
 fun main(args: Array<String>) {

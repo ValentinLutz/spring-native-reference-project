@@ -27,18 +27,18 @@ services:
     ports:
       - '8081:8080'
 
-#  localstack:
-#    image: localstack/localstack:0.12.20
-#    container_name: localstack
-#    hostname: localstack
-#    environment:
-#      SERVICES: iam,sqs,sns,sts
-#      DEBUG: 1
-#      EDGE_PORT: 4566
-#      DEFAULT_REGION: eu-central-1
-#      INIT_SCRIPTS_PATH: /docker-entrypoint-initaws.d
-#      ENFORCE_IAM: 1
-#    volumes:
-#      - ./localstack:/docker-entrypoint-initaws.d:ro
-#    ports:
-#      - "4566:4566"
+  localstack:
+    image: localstack/localstack:0.14.1
+    container_name: localstack
+    hostname: localstack
+    environment:
+      SERVICES: iam, sts, sns, sqs
+      DEBUG: 0
+      EDGE_PORT: 4566
+      DEFAULT_REGION: eu-central-1
+      INIT_SCRIPTS_PATH: /docker-entrypoint-initaws.d
+      ENFORCE_IAM: 1
+    volumes:
+      - ./localstack:/docker-entrypoint-initaws.d:ro
+    ports:
+      - "4566:4566"

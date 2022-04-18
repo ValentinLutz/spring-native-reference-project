@@ -12,3 +12,18 @@ spring:
 custom:
   region: NONE
   environment: DEV
+
+  billing:
+    aws:
+      access-key-id: test
+      secret-access-key: test
+      region: eu-central-1
+      endpoint: http://localhost:4566
+      proxy:
+      sqs:
+        pool-size: 2
+        queue-url: http://localhost:4566/000000000000/billing-dev-queue
+        iam-role: arn:aws:iam::000000000000:user/test
+      sns:
+        topic-arn: arn:aws:sns:eu-central-1:000000000000:billing-dev-topic
+        iam-role: arn:aws:iam::000000000000:user/test

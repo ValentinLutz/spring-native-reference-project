@@ -6,19 +6,19 @@ SHIPPING_QUEUES="${SHIPPING_QUEUES:-shipping-dev-queue}"
 
 # Create SNS topic
 awslocal sns create-topic \
-  --name $SHIPPING_TOPIC
+  --name "$SHIPPING_TOPIC"
 
 # Create array from queues
-IFS=',' read -ra queues <<<$SHIPPING_QUEUES
+IFS=',' read -ra queues <<<"$SHIPPING_QUEUES"
 
 # Create SQS queues
-for queue in ${queues[@]}; do
+for queue in "${queues[@]}"; do
   awslocal sqs create-queue \
-    --queue-name $queue
+    --queue-name "$queue"
 done
 
 # Subscribe SQS queues to SNS topic
-for queue in ${queues[@]}; do
+for queue in "${queues[@]}"; do
   awslocal sns subscribe \
     --topic-arn "arn:aws:sns:$DEFAULT_REGION:$SHIPPING_OWNER:$SHIPPING_TOPIC" \
     --protocol sqs \
